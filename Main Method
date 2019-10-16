@@ -1,0 +1,6 @@
+public static void main(String args[]){
+System.out.println("Input 1 for the scientific calculator");
+System.out.println("Input 2 for the matrix calculator");
+
+
+}
