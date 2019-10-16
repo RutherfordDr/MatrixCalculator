@@ -7,9 +7,13 @@ public Main{
     Scanner input = new Scanner(System.in);
     int input = input.nextInt();
     if (x == 1){
+      //Basic calculations
+      BasicCalculator bc = new BasicCalculator();
+      //Scientific calculations (Incomplete)
       System.out.println("scientific");
     } else if (x == 2){
-      System.out.println("matrix");
+      //Matrix calculations (Incomplete)
+      Matrix m = new Matrix();
     } else {
       System.out.println("Out of bounds input");
     }
