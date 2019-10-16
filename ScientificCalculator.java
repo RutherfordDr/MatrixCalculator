@@ -81,7 +81,7 @@ public class ScientificCalculator extends BasicCalculator{
 	}
 	
 	/*
-	 * TODO: The solve method so far only works for + and -. It is a huge mess and 
+	 * TODO: The solve method so far only works for +, -, *, /. It is a huge mess and 
 	 * 		 will need to be redone to incorporate all methods for the scientific
 	 * 		 calculator. For demo 1 this will have to suffice.
 	 */
@@ -96,7 +96,41 @@ public class ScientificCalculator extends BasicCalculator{
 				System.out.println(equationList);
 				return "Not valid equation.";
 			}
-		} else if (equationList.contains("+")) {
+		} else if (equationList.contains("*")) {
+			ArrayList<String> equationListP = new ArrayList<String>();
+			int iplus = equationList.indexOf("*");
+			int iprevious = iplus - 1;
+			int inext = iplus + 1;
+			double value = Double.parseDouble(equationList.get(iprevious)) * Double.parseDouble(equationList.get(inext));
+			for (int i=0; i < equationList.size(); i++) {
+				if (iprevious > i || i > inext) {
+					equationListP.add(equationList.get(i));
+					
+				} else if (i==iplus) {
+					equationListP.add(Double.toString(value));
+				}
+			}
+			
+			return solve(equationListP);
+			
+		   } else if (equationList.contains("/")) {
+				ArrayList<String> equationListP = new ArrayList<String>();
+				int iplus = equationList.indexOf("/");
+				int iprevious = iplus - 1;
+				int inext = iplus + 1;
+				double value = Double.parseDouble(equationList.get(iprevious)) / Double.parseDouble(equationList.get(inext));
+				for (int i=0; i < equationList.size(); i++) {
+					if (iprevious > i || i > inext) {
+						equationListP.add(equationList.get(i));
+						
+					} else if (i==iplus) {
+						equationListP.add(Double.toString(value));
+					}
+				}
+				
+				return solve(equationListP);
+				
+			} else if (equationList.contains("+")) {
 				ArrayList<String> equationListP = new ArrayList<String>();
 				int iplus = equationList.indexOf("+");
 				int iprevious = iplus - 1;
