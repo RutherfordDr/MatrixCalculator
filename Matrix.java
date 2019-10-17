@@ -16,7 +16,97 @@ public class Matrix {
 		row = setSizeRow();
 		double[][] aMatrix = createEmptyMatrix(row, col);
 		aMatrix = setValues(aMatrix);
+		String operation = "base";
+		while (!(operation.equals("=")){
+			System.out.println("Type '+' for addition");
+			System.out.println("Type '-' for subtraction");
+			System.out.println("Type 'x' for multiplication");
+			System.out.println("Type 's' for scalar multiplication);
+			System.out.println("Type 'T' for transpose");
+			System.out.println("Type 'I' for inverse");
+			System.out.println("Type 'Va' for eigenvalue");
+			System.out.println("Type 'Ve' for eigenvector");
+			System.out.println("Type '=' for solution");
+			operation = new scanner.nextLine();
+			if(operation.equals("+"){
+				addition();
+			} else if(operation.equals("-"){
+				subtraction();
+			} else if(operation.equals("x"){
+				multiplication();
+			}else if(operation.equals("s"){
+				mulitplicationByScalar();
+			}else if(operation.equals("I"){
+				inverse();
+			}else if(operation.equals("T"){
+				transpose();
+			}else if(operation.equals("Va"){
+				eigenValues();
+			}else if(operation.equals("Ve"){
+				eigenVectors();
+			}else if(operation.equals("="){
+				toString();
+			}else {
+				System.out.println("error invalid option");
+			}
+		}
 		//System.out.println(Arrays.toString(aMatrix));
+	}
+	
+	public int[][] addition(){
+		System.out.print("Insert Column size: ");
+		a = new Scanner(System.in);
+		System.out.print("Insert Row size: ");
+		b = new Scanner(System.in);
+		int [][] second = new int[a][b];
+		int [][] result = new int[a][b]
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				System.out.print("Insert value in row " + (i+1) + " and column " + (j+1) + " : ");
+				scanner = new Scanner(System.in); 
+				String value = scanner.nextLine();
+				if (value.equals("")) {
+					System.out.println("Empty input, value equals 0");
+					val = 0;}
+				else {
+					val = Double.parseDouble(value);}
+				second[i][j] = val;
+			}
+		}
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				second[i][j] += aMatrix[i][j]
+			}
+		}
+		return second;
+	}
+				 
+	public int[][] subtraction(){
+		System.out.print("Insert Column size: ");
+		a = new Scanner(System.in);
+		System.out.print("Insert Row size: ");
+		b = new Scanner(System.in);
+		int [][] second = new int[a][b];
+		int [][] result = new int[a][b]
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				System.out.print("Insert value in row " + (i+1) + " and column " + (j+1) + " : ");
+				scanner = new Scanner(System.in); 
+				String value = scanner.nextLine();
+				if (value.equals("")) {
+					System.out.println("Empty input, value equals 0");
+					val = 0;}
+				else {
+					val = Double.parseDouble(value);}
+				second[i][j] = val;
+			}
+		}
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				second[i][j] = aMatrix[i][j] - second[i][j];
+			}
+		}
+		return second;
 	}
 	
 	public Matrix(int row, int col) {
