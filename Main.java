@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class Main{
+	static boolean scientific = false;
+	
   public static void main(String args []){
     System.out.println("Input 1 for basic calculator");
     System.out.println("Input 2 for scientific calculator");
@@ -12,6 +14,7 @@ public class Main{
       BasicCalculator bc = new BasicCalculator();
     } else if (variable ==2) {
       //Scientific calculations (Incomplete)
+    	scientific = true;
       ScientificCalculatorTUI sc = new ScientificCalculatorTUI();
       sc.start();
       //Matrix calculations (Incomplete)
