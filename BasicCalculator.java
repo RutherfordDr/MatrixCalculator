@@ -8,6 +8,7 @@ public class BasicCalculator {
 	
 	public BasicCalculator() {
 		
+		if (Main.scientific == false){
 		System.out.print("Insert number (type double):");
 		scanner = new Scanner(System.in); 
 		String numin = scanner.nextLine();
@@ -32,10 +33,11 @@ public class BasicCalculator {
 		
 		OpType(numb, operation);
 		}
+		}
 		
 	}
 	
-	public BasicCalculator(String epx, String op) {
+	public void BasicCalc(){
 		
 	}
 	
