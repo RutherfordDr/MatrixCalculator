@@ -32,7 +32,7 @@ class MatrixSubtraction
          for (n = 0; n < b; n++)
              subtraction[i][n] = first[i][n] - second[i][n];  
  
-      System.out.println("Sum of the matrix:");
+      System.out.println("Subtraction of the matrix:");
      
       for (i = 0; i < a; i++)
       {
