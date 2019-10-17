@@ -188,3 +188,7 @@ public int determinant(Matrix aMatrix)
 	
 	
 	}
+	
+	
+	
+}
