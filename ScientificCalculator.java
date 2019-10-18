@@ -59,9 +59,9 @@ public class ScientificCalculator extends BasicCalculator{
 		equationString = "";
 	}
 	
-	public void displayEquation() {
-		System.out.println(equationString);
-	}
+	//public void displayEquation() {
+	//	System.out.println(equationString);
+	//}
 	
 	public double pi() {
 		return Math.PI;
@@ -167,7 +167,7 @@ public class ScientificCalculator extends BasicCalculator{
 				}
 				
 			}
-		return "Something went wrong.";
+		return "Not valid equation.";
 		}
 			
 	public static boolean isNumeric(String strNum) {
