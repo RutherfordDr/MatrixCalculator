@@ -27,7 +27,7 @@ public class ScientificCalculatorTUI {
 	public void start() {
 		displayOptions();
 		while (running) {
-			promptForEquationReal();
+			promptForEquation();
 		}
 		System.out.println("Would you like to enter another equation Y/N");
 		Scanner scanner = new Scanner(System.in);
@@ -80,7 +80,7 @@ public class ScientificCalculatorTUI {
 		System.out.println(solution.toString());
 	}
 	
-	public void promptForEquationReal() {
+	public void promptForEquation() {
 		System.out.println("Enter the corresponding arithmetic option or number.");
 		Scanner scanner = new Scanner(System.in);
 		
@@ -164,7 +164,7 @@ public class ScientificCalculatorTUI {
 			default:
 				System.out.println("Not an option.");
 				displayOptions();
-				promptForEquationReal();
+				promptForEquation();
 			}
 		}
 	}
@@ -187,56 +187,6 @@ public class ScientificCalculatorTUI {
 		
 	}
 	
-	public void promptForArithmetic() {
-		System.out.println("Enter the corresponding char for the arithmetic option.");
-		Scanner scanner = new Scanner(System.in);
-		String arithmeticOptionString = scanner.next();
-		
-		
-		switch (arithmeticOptionString) {
-			case "=":
-				scientificCalculator.parseEquation(scientificCalculator.getEquationString());
-				writingEquation = false;
-				running = false;
-				break;
-			case "+":
-				scientificCalculator.updateEquationString("+");
-				displayEquation();
-				break;
-			case "-":
-				scientificCalculator.updateEquationString("-");
-				displayEquation();
-				break;
-			case "*":
-				scientificCalculator.updateEquationString("*");
-				displayEquation();
-				break;
-			case "/":
-				scientificCalculator.updateEquationString("/");
-				displayEquation();
-				break;
-			case "log":
-				scientificCalculator.updateEquationString("log");
-				displayEquation();
-				break;
-			case "ln":
-				scientificCalculator.updateEquationString("ln");
-				displayEquation();
-				break;
-			case "^2":
-				scientificCalculator.updateEquationString("^2");
-				displayEquation();
-				break;
-			case "^":
-				scientificCalculator.updateEquationString("^");
-				displayEquation();
-				break;
-			default:
-				System.out.println("Not an option.");
-				displayOptions();
-				promptForArithmetic();
-		}
-	}
 	
 	
 	
