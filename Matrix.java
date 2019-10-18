@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -5,189 +6,333 @@ public class Matrix
 
 {
 
-private double [][] aMatrix;
-
-private int column;
-
-private int row;
-
-private int size;
-
-
-public Matrix()
-
-	{
-	
-	//Set matrix to default 2x2
-	
-	
-	}
-
-public Matrix(int inRow, int inColumn) 
-	
-	{
+	private Scanner scanner;
 		
-		aMatrix = new double [inRow][inColumn];
+	private double [][] aMatrix;
 	
-	}
-
-public Matrix(Matrix inMatrix)
-
-	{
+	private int column;
+	
+	private int row;
+	
+	private int size;
 	
 	
-	//copy constructor
+	public Matrix()
 	
-	}
-
-
-
-public double[][] getMatrix()
-
-	{
+		{
 		
-	
-	
-	
-	
-	
-	
-	
-	
-	}
-
-
-public void setMatrix(Matrix inMatrix)
-
-	{
+			getMatrixFromUser();
 		
+		}
 	
-	
-	
-	
-	}
-
-
-
-
-
-public void getMatrixFromUser(Matrix inMatrix)
-
-	{
+	public Matrix(int inRow, int inColumn) 
 		
-	
-	
-	
-	
-	}
-
-
-
-
-public double[][] transpose(Matrix inMatrix)
-
-	{
-	
-	//transpose
-
-
-	}
-
-
-public double [][] addition(Matrix inMatrix)
-
-	{
+		{
+				
+			setRow(inRow);
+			
+			setColumn(inColumn);
 		
-	
-	
-	
-	
-	}
-
-
-public double [][] subtraction(Matrix inMatrix)
-
-	{
+			aMatrix = new double [inRow][inColumn];
 		
+		}
 	
+	public Matrix(Matrix inMatrix)
 	
-	
-	
-	}
-
-public double [][] multiplication(Matrix inMatrix)
-
-	{
+		{
 		
-	
-	
-	
-	
-	}
-
-
-public double [][] MultiplicationScalar(Matrix inMatrix,int scalar)
-
-	{
+		setRow(inMatrix.getRow());	
 		
-	
-	
-	
-	
-	}
-
-public double [][] inverse(Matrix inMatrix)
-
-	{
+		setColumn(inMatrix.getColumn());
 		
+		setMatrix(inMatrix.getMatrix());
+			
+		}
 	
 	
 	
+	public double[][] getMatrix()
 	
-	}
-
-
-public double [][] reducedRowEcheleon(Matrix inMatrix)
-
-	{
+		{
+			
+			double[][] temp = Arrays.stream(aMatrix).map(double[]::clone).toArray(double[][]::new);//FROM https://stackoverflow.com/questions/5617016/how-do-i-copy-a-2-dimensional-array-in-java 	
+			
+			return temp;
+	
+		}
+	
+	
+	
+	public void setRow(int inRow)
+	
+		{
 		
-	
-	
-	
-	
-	}
-
-
-public void resetArray(Matrix inMatrix)
-
-	{
+			row = inRow; 
 		
+		}
 	
+	public void setColumn(int inColumn)
 	
+		{
 	
+			column = inColumn; 
 	
-	}
-
-
-public String toString(Matrix inMatrix)
-
-	{
 		
+		}
+	
+	
+	
+	public int getRow()
+	
+		{
+			int tempRow = row;
+			 
+			return tempRow;
+		}
+	
+	public int getColumn()
+	
+		{
+		
+			int tempColumn = column;
+			
+			return column; 
+		
+		
+		}
+	
+	public void setMatrix(double [][] inMatrix)
+	
+		{
+			
+			row = inMatrix.length;
+			
+			column = inMatrix[0].length;
+			
+			aMatrix = inMatrix; 
+		
+		}
+	
+		
+	public void getMatrixFromUser()
+	
+		{
+			
+			
+		
+			int sizecol = 0;
+			System.out.print("Insert Column size: ");
+			scanner = new Scanner(System.in); 
+			String sizeCol = scanner.nextLine();
+			if (sizeCol.equals("")) {
+				System.out.println("Empty input, Column = 1");
+				sizecol = 1;}
+			else
+				sizecol = Integer.parseInt(sizeCol);
+			setColumn(sizecol);
+		
+		
+			int sizerow = 0;
+			System.out.print("Insert Row size: ");
+			scanner = new Scanner(System.in); 
+			String sizeRow = scanner.nextLine();
+			if (sizeRow.equals("")) {
+				System.out.println("Empty input, row = 1");
+				sizerow = 1;}
+			else
+				sizerow = Integer.parseInt(sizeRow);
+			setRow(sizerow);
+		
+		
+		
+		double val = 0;
+			for (int i = 0; i < row; i++) 
+			
+			{
+				for (int j = 0; j < column; j++) 
+				
+				{
+					
+					System.out.print("Insert value in row " + (i+1) + " and column " + (j+1) + " : ");
+					
+					scanner = new Scanner(System.in); 
+					
+					String value = scanner.nextLine();
+					
+					if (value.equals("")) 
+					
+					{
+						System.out.println("Empty input, value equals 0");
+						val = 0;}
+					
+					else {
+					
+						val = Double.parseDouble(value);
+						
+					}
+					
+					aMatrix[i][j] = val;
+					
+			}
+			
+		}
+		
+			setMatrix(aMatrix);
+		
+		
+		
+		}
 	
 	
 	
 	
-	}
-
-
-public int determinant(Matrix aMatrix)
-
-	{
+	public double[][] transpose(Matrix inMatrix)// CODE FROM https://stackoverflow.com/questions/15449711/transpose-double-matrix-with-a-java-function
+	
+		{
+		
+			double [][] arrayFromInMatrix = inMatrix.getMatrix();
+		
+			double[][] temp = new double[arrayFromInMatrix[0].length][arrayFromInMatrix.length];
+	       
+			for (int i = 0; i < arrayFromInMatrix.length; i++)
+	            
+				for (int j = 0; j < arrayFromInMatrix[0].length; j++)
+	                temp[j][i] = arrayFromInMatrix[i][j];
+	        
+			return temp;
+	
+		}
 	
 	
+	/*
+	 * public double [][] addition(Matrix inMatrix)
+	 * 
+	 * {
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * }
+	 */
 	
 	
-	}
+	/*
+	 * public double [][] subtraction(Matrix inMatrix)
+	 * 
+	 * {
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * }
+	 */
+	
+	/*
+	 * public double [][] multiplication(Matrix inMatrix)
+	 * 
+	 * {
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * }
+	 */
+	
+	
+	public double [][] MultiplicationScalar(int scalar)
+	
+		{
+			
+		double [][] array = getMatrix();
+		
+		double[][] temp = new double[array.length][array[0].length];
+		
+		for (int i = 0; i < array.length; i++)
+            
+			for (int j = 0; j < array[0].length; j++)
+                
+				temp[i][j] = array[i][j*scalar];
+		
+		return temp; 
+		
+		
+		}
+	
+	/*
+	 * public double [][] inverse(Matrix inMatrix)
+	 * 
+	 * {
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * }
+	 */
+	
+	
+	/*
+	 * public double [][] reducedRowEcheleon(Matrix inMatrix)
+	 * 
+	 * {
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * }
+	 */
+	
+	
+	public void resetArray()
+	
+		{
+			
+		
+			double [][] tempArray = new double[row][column];
+			
+			setMatrix(tempArray);
+		
+		
+		}
+	
+	
+	public String toString(){    //FROM https://www.dreamincode.net/forums/topic/379950-making-a-tostring-method-for-2d-integer-array/
+		
+		double[][] r = getMatrix(); 
+		
+		String s;
+		
+		
+		for(int i=0; i< r.length; i++)
+		{
+			for(int j=0; j<r[i].length; j++){
+				s +=  r[i][j];
+			}
+			s += "\n";
+			
+		}
+		return s;
+	} 
+	
+	
+	/*
+	 * public int determinant(Matrix aMatrix)
+	 * 
+	 * {
+	 * 
+	 * 
+	 * 
+	 * 
+	 * }
+	 */
 	
 	
 	
