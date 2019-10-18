@@ -15,6 +15,8 @@ public class Matrix
 	
 	int size;
 	
+	private double [][] result;
+	
 	public Matrix()
 	
 		{
@@ -367,11 +369,16 @@ public class Matrix
 	 * }
 	 */
 	
-
-	
-
-
-
+	public void setResult(double[][] aMatrix){
+		result = new double [aMatrix.length][aMatrix[0].length];
+		double val = 0;
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+                		result[i][j] = aMatrix[i][j];
+			}
+		}
+		return result;
+	}
 }
 
 
