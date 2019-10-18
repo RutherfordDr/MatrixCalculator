@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -308,7 +307,7 @@ public class Matrix
 		
 		double[][] r = getMatrix(); 
 		
-		String s;
+		String s = "";
 		
 		
 		for(int i=0; i< r.length; i++)
@@ -334,6 +333,19 @@ public class Matrix
 	 * }
 	 */
 	
+	public static void main(String[] args) 
+
+
+	{
 	
+		Matrix A = new Matrix();
+		
 	
+		System.out.println(A.toString());
+
+	}
+	
+
+
+
 }
