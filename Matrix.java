@@ -9,61 +9,137 @@ import java.util.Scanner;
 public class Matrix {
 	private Scanner scanner;
 	int row=0;
-	int col=0;
+    int col=0;
+    double[][] aMatrix;
+    double[][] result;
 
 	public Matrix() {
 		col = setSizeCol();
 		row = setSizeRow();
-		double[][] aMatrix = createEmptyMatrix(row, col);
+		aMatrix = createEmptyMatrix(row, col);
 		aMatrix = setValues(aMatrix);
-		String operation = "base";
-		while (!(operation.equals("=")){
+        String operation = "base";
+        Scanner scanner = new Scanner(System.in);
+		while (!(operation.equals("="))){
 			System.out.println("Type '+' for addition");
 			System.out.println("Type '-' for subtraction");
 			System.out.println("Type 'x' for multiplication");
-			System.out.println("Type 's' for scalar multiplication);
+			System.out.println("Type 's' for scalar multiplication");
 			System.out.println("Type 'T' for transpose");
 			System.out.println("Type 'I' for inverse");
 			System.out.println("Type 'Va' for eigenvalue");
 			System.out.println("Type 'Ve' for eigenvector");
 			System.out.println("Type '=' for solution");
-			operation = new scanner.nextLine();
-			if(operation.equals("+"){
-				addition();
-			} else if(operation.equals("-"){
-				subtraction();
-			} else if(operation.equals("x"){
-				multiplication();
-			}else if(operation.equals("s"){
-				mulitplicationByScalar();
-			}else if(operation.equals("I"){
-				inverse();
-			}else if(operation.equals("T"){
-				transpose();
-			}else if(operation.equals("Va"){
-				eigenValues();
-			}else if(operation.equals("Ve"){
-				eigenVectors();
-			}else if(operation.equals("="){
-				toString();
+			operation = scanner.nextLine();
+			if(operation.equals("+")){
+				setResult(addition());
+			} else if(operation.equals("-")){
+				setResult(subtraction());
+			} else if(operation.equals("x")){
+				setResult(multiplication());
+			}else if(operation.equals("s")){
+				setResult(mulitplicationByScalar());
+			}else if(operation.equals("I")){
+				setResult(inverse());
+			}else if(operation.equals("T")){
+				setResult(transpose());
+			}else if(operation.equals("Va")){
+				setResult(eigenValues());
+			}else if(operation.equals("Ve")){
+				setResult(eigenVectors());
+			}else if(operation.equals("=")){
+				System.out.println(toString());
 			}else {
 				System.out.println("error invalid option");
 			}
 		}
 		//System.out.println(Arrays.toString(aMatrix));
 	}
-	
-	public int[][] addition(){
-		System.out.print("Insert Column size: ");
-		a = new Scanner(System.in);
+    
+    public double[][] multiplication(){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Insert Column size: ");
+		int a = input.nextInt();
 		System.out.print("Insert Row size: ");
-		b = new Scanner(System.in);
-		int [][] second = new int[a][b];
-		int [][] result = new int[a][b]
+		int b = input.nextInt();
+        double [][] second = new double[a][b];
+        return second;
+    }
+
+    public double[][] mulitplicationByScalar(){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Insert Column size: ");
+		int a = input.nextInt();
+		System.out.print("Insert Row size: ");
+		int b = input.nextInt();
+        double [][] second = new double[a][b];
+        return second;
+    }
+
+    public double[][] inverse(){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Insert Column size: ");
+		int a = input.nextInt();
+		System.out.print("Insert Row size: ");
+		int b = input.nextInt();
+        double [][] second = new double[a][b];
+        return second;
+    }
+
+    public double[][] transpose(){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Insert Column size: ");
+		int a = input.nextInt();
+		System.out.print("Insert Row size: ");
+		int b = input.nextInt();
+        double [][] second = new double[a][b];
+        return second;
+    }
+
+    public double[][] eigenValues(){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Insert Column size: ");
+		int a = input.nextInt();
+		System.out.print("Insert Row size: ");
+		int b = input.nextInt();
+        double [][] second = new double[a][b];
+        return second;
+    }
+
+    public double[][] eigenVectors(){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Insert Column size: ");
+		int a = input.nextInt();
+		System.out.print("Insert Row size: ");
+		int b = input.nextInt();
+        double [][] second = new double[a][b];
+        return second;
+    }
+
+    public String toString(){
+        String s = "";
+        for(int i=0; i< aMatrix.length; i++){
+            for(int j=0; j<aMatrix[0].length; j++){
+                s +=  result[i][j] + ", ";
+            }
+            s += "\n";
+        }
+        return s;
+    }
+
+	public double[][] addition(){
+        Scanner input = new Scanner(System.in);
+		System.out.print("Insert Column size: ");
+		int a = input.nextInt();
+		System.out.print("Insert Row size: ");
+		int b = input.nextInt();
+		double [][] second = new double[a][b];
+        int [][] result = new int[a][b];
+        double val = 0;
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
 				System.out.print("Insert value in row " + (i+1) + " and column " + (j+1) + " : ");
-				scanner = new Scanner(System.in); 
+				Scanner scanner = new Scanner(System.in); 
 				String value = scanner.nextLine();
 				if (value.equals("")) {
 					System.out.println("Empty input, value equals 0");
@@ -75,23 +151,25 @@ public class Matrix {
 		}
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
-				second[i][j] += aMatrix[i][j]
+				second[i][j] += aMatrix[i][j];
 			}
 		}
 		return second;
 	}
 				 
-	public int[][] subtraction(){
+	public double[][] subtraction(){
+        Scanner input = new Scanner(System.in);
 		System.out.print("Insert Column size: ");
-		a = new Scanner(System.in);
+		int a = input.nextInt();
 		System.out.print("Insert Row size: ");
-		b = new Scanner(System.in);
-		int [][] second = new int[a][b];
-		int [][] result = new int[a][b]
+		int b = input.nextInt();
+		double [][] second = new double[a][b];
+        int [][] result = new int[a][b];
+        double val = 0;
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
 				System.out.print("Insert value in row " + (i+1) + " and column " + (j+1) + " : ");
-				scanner = new Scanner(System.in); 
+				Scanner scanner = new Scanner(System.in); 
 				String value = scanner.nextLine();
 				if (value.equals("")) {
 					System.out.println("Empty input, value equals 0");
@@ -121,7 +199,7 @@ public class Matrix {
 	public int setSizeCol() {
 		int sizecol = 0;
 		System.out.print("Insert Column size: ");
-		scanner = new Scanner(System.in); 
+		Scanner scanner = new Scanner(System.in); 
 		String sizeCol = scanner.nextLine();
 		if (sizeCol.equals("")) {
 			System.out.println("Empty input, Column = 1");
@@ -134,7 +212,7 @@ public class Matrix {
 	public int setSizeRow() {
 		int sizerow = 0;
 		System.out.print("Insert Row size: ");
-		scanner = new Scanner(System.in); 
+		Scanner scanner = new Scanner(System.in); 
 		String sizeRow = scanner.nextLine();
 		if (sizeRow.equals("")) {
 			System.out.println("Empty input, row = 1");
@@ -150,7 +228,7 @@ public class Matrix {
 			for (int j = 0; j < col; j++) {
 				
 				System.out.print("Insert value in row " + (i+1) + " and column " + (j+1) + " : ");
-				scanner = new Scanner(System.in); 
+				Scanner scanner = new Scanner(System.in); 
 				String value = scanner.nextLine();
 				if (value.equals("")) {
 					System.out.println("Empty input, value equals 0");
@@ -164,6 +242,17 @@ public class Matrix {
 		}
 		return aMatrix;
 		
+    }
+    
+    public double[][] setResult(double[][] aMatrix) {
+        result = new double [aMatrix.length][aMatrix[0].length];
+		double val = 0;
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+                result[i][j] = aMatrix[i][j];
+			}
+		}
+		return result;
 	}
 	
 	public double[][] createEmptyMatrix(int row, int col) {
@@ -178,5 +267,4 @@ public class Matrix {
 		}
 	}
 		
-
 }
