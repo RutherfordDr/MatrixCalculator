@@ -168,8 +168,7 @@ public class ScientificCalculatorTUI {
 			}
 		}
 	}
-		
-	
+
 	public void promptForNumber() {
 		System.out.println("Enter a number.");
 		Scanner scanner = new Scanner(System.in);

@@ -59,9 +59,6 @@ public class ScientificCalculator extends BasicCalculator{
 		equationString = "";
 	}
 	
-	//public void displayEquation() {
-	//	System.out.println(equationString);
-	//}
 	
 	public double pi() {
 		return Math.PI;
