@@ -11,7 +11,7 @@ public class Main{
     int variable = input.nextInt();
     if (variable == 1){
       //Basic calculations
-      BasicCalculator bc = new BasicCalculator();
+      BasicCalculator bc = new BasicCalculatorTUI();
     } else if (variable ==2) {
       //Scientific calculations (Incomplete)
     	scientific = true;

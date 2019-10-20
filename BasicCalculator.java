@@ -1,82 +1,159 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class BasicCalculator {
-
-	private Scanner scanner;
-	private double ans;
 	
+	String operation = "";
+	double result;
+	private double previousAns=0;
 	
 	public BasicCalculator() {
 		
-		if (Main.scientific == false){
-		System.out.print("Insert number (type double):");
-		scanner = new Scanner(System.in); 
-		String numin = scanner.nextLine();
-		ans = Double.parseDouble(numin);
-		
-		int i = 0;
-		while (i==0) {
-		
-		System.out.print("Addition=1, Substaction=2, Multiplication=3, Division=4, Equals=5: ");
-		scanner = new Scanner(System.in); 
-		String op = scanner.nextLine();
-		int operation = Integer.parseInt(op);
-		
-		if (operation==5){
-			OpType(0, 5);
-			i=1; break;}
-		
-		System.out.print("Insert number (type double):");
-		scanner = new Scanner(System.in); 
-		String num = scanner.nextLine();
-		double numb = Double.parseDouble(num);
-		
-		OpType(numb, operation);
-		}
-		}
 		
 	}
 	
-	public void BasicCalc(){
-		
-	}
-	
-	public void OpType(double epx, int op) {
-		
-		switch (op) {
-		case 1:
-			Addition(epx); break;
-		case 2:
-			Substraction(epx); break;
-		case 3:
-			Multiplication(epx); break;
-		case 4:
-			Division(epx); break;
-		case 5:
-			System.out.println("Result is:" + ans); break;
+	public String BasicOperations(String ops) {
+		switch (ops) {
+		case "=":
+			return " = ";
+		case "+":
+			return " + ";
+		case "-":
+			return " - ";
+		case "*":
+			return " * ";
+		case "/":
+			return " / ";
+		case "(":
+			return " ( ";
+		case ")":
+			return " ) ";
 		default:
-			System.out.println("Operation not valid"); 
-			break;
+			System.out.println("Operation not valid.");
+			return "notvalid";
 		}
 	}
 	
-	public void Addition(double epx) {
-		ans+=epx;
+	public ArrayList<String> parseEquation(String equationToSolve) {
+		ArrayList<String> splitEquation = new ArrayList<String>(Arrays.asList(equationToSolve.split("\\s+")));
+		ArrayList<String> cleanedUpEquation = new ArrayList<String>();
+		for (String i: splitEquation) {
+			if (!i.contentEquals("")) {
+				cleanedUpEquation.add(i);
+			}
+		}
+		return cleanedUpEquation;
 		
 	}
 	
-	public void Substraction(double epx) {
-		ans-=epx;
-		
+	public String solve(ArrayList<String> equationList) {
+		if (equationList.size() == 1) {
+			String input = equationList.get(0);
+			if (isNumeric(input)){
+				return input;
+			} else if (input.equals("pi")){
+				return Double.toString(pi());
+			} else {
+				System.out.println(equationList);
+				return "Not valid equation.";
+			}
+		} else if (equationList.contains("*")) {
+			ArrayList<String> equationListP = new ArrayList<String>();
+			int iplus = equationList.indexOf("*");
+			int iprevious = iplus - 1;
+			int inext = iplus + 1;
+			double value = Double.parseDouble(equationList.get(iprevious)) * Double.parseDouble(equationList.get(inext));
+			for (int i=0; i < equationList.size(); i++) {
+				if (iprevious > i || i > inext) {
+					equationListP.add(equationList.get(i));
+					
+				} else if (i==iplus) {
+					equationListP.add(Double.toString(value));
+				}
+			}
+			
+			return solve(equationListP);
+			
+		   } else if (equationList.contains("/")) {
+				ArrayList<String> equationListP = new ArrayList<String>();
+				int iplus = equationList.indexOf("/");
+				int iprevious = iplus - 1;
+				int inext = iplus + 1;
+				double value = Double.parseDouble(equationList.get(iprevious)) / Double.parseDouble(equationList.get(inext));
+				for (int i=0; i < equationList.size(); i++) {
+					if (iprevious > i || i > inext) {
+						equationListP.add(equationList.get(i));
+						
+					} else if (i==iplus) {
+						equationListP.add(Double.toString(value));
+					}
+				}
+				
+				return solve(equationListP);
+				
+			} else if (equationList.contains("+")) {
+				ArrayList<String> equationListP = new ArrayList<String>();
+				int iplus = equationList.indexOf("+");
+				int iprevious = iplus - 1;
+				int inext = iplus + 1;
+				double value = Double.parseDouble(equationList.get(iprevious)) + Double.parseDouble(equationList.get(inext));
+				for (int i=0; i < equationList.size(); i++) {
+					if (iprevious > i || i > inext) {
+						equationListP.add(equationList.get(i));
+						
+					} else if (i==iplus) {
+						equationListP.add(Double.toString(value));
+					}
+				}
+				
+				return solve(equationListP);
+				
+			} else {
+				if (equationList.contains("-")) {
+					ArrayList<String> equationListP = new ArrayList<String>();
+					int iplus = equationList.indexOf("-");
+					int iprevious = iplus - 1;
+					int inext = iplus + 1;
+					double value = Double.parseDouble(equationList.get(iprevious)) - Double.parseDouble(equationList.get(inext));
+					for (int i=0; i < equationList.size(); i++) {
+						if (iprevious > i || i > inext) {
+							equationListP.add(equationList.get(i));
+							
+						} else if (i==iplus) {
+							equationListP.add(Double.toString(value));
+						}
+					}
+					
+					return solve(equationListP);
+				}
+				
+			}
+		return "Not valid equation.";
+		}
+	
+	public double pi() {
+		return Math.PI;
 	}
 	
-	public void Multiplication(double epx) {
-		ans*=epx;
-		
+	public static boolean isNumeric(String strNum) {
+	    try {
+	        double d = Double.parseDouble(strNum);
+	    } catch (NumberFormatException | NullPointerException nfe) {
+	        return false;
+	    }
+	    return true;
 	}
 	
-	public void Division(double epx) {
-		ans/=epx;
+	public void computeResult() {
+		operation = BasicCalculatorTUI.getOperation();
+		ArrayList<String> ops= new ArrayList<String>();
+		ops = parseEquation(operation);
+		String resString = solve(ops);
+		result = Double.parseDouble(resString);
+	}
 		
+	public double getResult() {
+		return result;
 	}
 }

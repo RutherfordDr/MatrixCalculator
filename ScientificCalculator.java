@@ -60,121 +60,13 @@ public class ScientificCalculator extends BasicCalculator{
 	}
 	
 	
-	public double pi() {
-		return Math.PI;
-	}
-	
-	
-	public ArrayList<String> parseEquation(String equationToSolve) {
-		ArrayList<String> splitEquation = new ArrayList<String>(Arrays.asList(equationToSolve.split("\\s+")));
-		ArrayList<String> cleanedUpEquation = new ArrayList<String>();
-		for (String i: splitEquation) {
-			if (!i.contentEquals("")) {
-				cleanedUpEquation.add(i);
-			}
-		}
-		return cleanedUpEquation;
-		
-	}
 	
 	/*
 	 * TODO: The solve method so far only works for +, -, *, /. It is a huge mess and 
 	 * 		 will need to be redone to incorporate all methods for the scientific
 	 * 		 calculator. For demo 1 this will have to suffice.
 	 */
-	public String solve(ArrayList<String> equationList) {
-		if (equationList.size() == 1) {
-			String input = equationList.get(0);
-			if (isNumeric(input)){
-				return input;
-			} else if (input.equals("pi")){
-				return Double.toString(pi());
-			} else {
-				System.out.println(equationList);
-				return "Not valid equation.";
-			}
-		} else if (equationList.contains("*")) {
-			ArrayList<String> equationListP = new ArrayList<String>();
-			int iplus = equationList.indexOf("*");
-			int iprevious = iplus - 1;
-			int inext = iplus + 1;
-			double value = Double.parseDouble(equationList.get(iprevious)) * Double.parseDouble(equationList.get(inext));
-			for (int i=0; i < equationList.size(); i++) {
-				if (iprevious > i || i > inext) {
-					equationListP.add(equationList.get(i));
-					
-				} else if (i==iplus) {
-					equationListP.add(Double.toString(value));
-				}
-			}
-			
-			return solve(equationListP);
-			
-		   } else if (equationList.contains("/")) {
-				ArrayList<String> equationListP = new ArrayList<String>();
-				int iplus = equationList.indexOf("/");
-				int iprevious = iplus - 1;
-				int inext = iplus + 1;
-				double value = Double.parseDouble(equationList.get(iprevious)) / Double.parseDouble(equationList.get(inext));
-				for (int i=0; i < equationList.size(); i++) {
-					if (iprevious > i || i > inext) {
-						equationListP.add(equationList.get(i));
-						
-					} else if (i==iplus) {
-						equationListP.add(Double.toString(value));
-					}
-				}
 				
-				return solve(equationListP);
-				
-			} else if (equationList.contains("+")) {
-				ArrayList<String> equationListP = new ArrayList<String>();
-				int iplus = equationList.indexOf("+");
-				int iprevious = iplus - 1;
-				int inext = iplus + 1;
-				double value = Double.parseDouble(equationList.get(iprevious)) + Double.parseDouble(equationList.get(inext));
-				for (int i=0; i < equationList.size(); i++) {
-					if (iprevious > i || i > inext) {
-						equationListP.add(equationList.get(i));
-						
-					} else if (i==iplus) {
-						equationListP.add(Double.toString(value));
-					}
-				}
-				
-				return solve(equationListP);
-				
-			} else {
-				if (equationList.contains("-")) {
-					ArrayList<String> equationListP = new ArrayList<String>();
-					int iplus = equationList.indexOf("-");
-					int iprevious = iplus - 1;
-					int inext = iplus + 1;
-					double value = Double.parseDouble(equationList.get(iprevious)) - Double.parseDouble(equationList.get(inext));
-					for (int i=0; i < equationList.size(); i++) {
-						if (iprevious > i || i > inext) {
-							equationListP.add(equationList.get(i));
-							
-						} else if (i==iplus) {
-							equationListP.add(Double.toString(value));
-						}
-					}
-					
-					return solve(equationListP);
-				}
-				
-			}
-		return "Not valid equation.";
-		}
-			
-	public static boolean isNumeric(String strNum) {
-	    try {
-	        double d = Double.parseDouble(strNum);
-	    } catch (NumberFormatException | NullPointerException nfe) {
-	        return false;
-	    }
-	    return true;
-	}
 	
 	/*
 	 * The following methods are arithmetic methods for the scientific calculator.
