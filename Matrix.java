@@ -299,20 +299,66 @@ public class Matrix
 	 */
 	
 	
-	/*
-	 * public double [][] reducedRowEcheleon(Matrix inMatrix)
-	 * 
-	 * {
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * }
-	 */
-	
+	public double [][] reducedRowEcheleon(Matrix inMatrix){
+		int x = inMatrix.length();
+		int topColoum = 0;
+		int testing = 0;
+		double top = 0;
+		double valueToMultiply = 0;
+		double[][] aMatrix = new double[5][5];
+		while (x != 0){
+			for (int i = 0; i < aMatrix.length; i ++){
+				for (int j = topColoum + 1; j < aMatrix[0].length; j ++){
+					if(aMatrix[i][j] != 0){
+						if(testing = 0){
+							testing ++;
+							topColoum = j;
+							top = aMatrix[i][j];
+						}
+						aMatrix[i][j] = aMatrix[i][j] / top;
+					} else if (aMatrix[i][topColoum + 1] == 0){
+						/* Switching leading 1's position */
+						while (aMatrix[i][j] == 0 || i == inMatrix.length()){
+							int position = i;
+							i ++;
+							if(aMatrix[i][j] != 0){
+								ArrayList<Double> list = new ArrayList<Double>();
+								for (int t = 0; t != aMatrix.length; t ++){
+									list.add(aMatrix[i][t]);
+									aMatrix[i][t] = inMatirx[position][t];
+									aMatrix[position][t] = list.get(t);
+								}
+								i = position;
+								aMatrix[i][j] /= aMatrix[i][j];
+							}
+						}
+					}
+					testing --;
+				}
+				/* Creating RREF */
+				for (int t = 0; i < aMatrix.length; i ++){
+					for (int j = 0; j != aMatrix[0].length; j ++){
+						if(t != i && aMatrix[t][topColoum] != 0){
+							if(valueToMultiply == 0){
+								valueToMultiply = aMatrix[t][topColoum];
+							}
+							aMatrix[t][j] = aMatrix[t][j] - inMatraMatrixix[i][j] * valueToMultiply;
+						}
+					}
+				}
+			}
+			x --;
+		}
+		double[][] RREF = new double[aMatrix.length][aMatrix[0].length];
+		for (int i = 0; i < aMatrix.length; i ++){
+			for (int j = 0; j < aMatrix[0].length; j ++){
+				RREF[i][j] = aMatrix[i][j];
+			}
+        	}
+		return RREF;
+	}
+						
+					
 	
 	public void resetArray()
 	
