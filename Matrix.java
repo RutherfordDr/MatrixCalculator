@@ -298,65 +298,25 @@ public class Matrix
 	 * }
 	 */
 	
-	
+	//Taken from https://stackoverflow.com/questions/19940740/gaussian-elimination-java (change later)
 	public double [][] reducedRowEcheleon(Matrix inMatrix){
-		int x = aMatrix.length;
-		int topColoum = 0;
-		int testing = 0;
-		double top = 0;
-		double valueToMultiply = 0;
-		while (x != 0){
-			for (int i = 0; i < aMatrix.length; i ++){
-				for (int j = topColoum + 1; j < aMatrix[0].length; j ++){
-					if(aMatrix[i][j] != 0){
-						if(testing == 0){
-							testing ++;
-							topColoum = j;
-							top = aMatrix[i][j];
-						}
-						aMatrix[i][j] = aMatrix[i][j] / top;
-					} else if (aMatrix[i][topColoum + 1] == 0){
-						/* Switching leading 1's position */
-						while (aMatrix[i][j] == 0 || i == aMatrix.length){
-							int position = i;
-							i ++;
-							if(aMatrix[i][j] != 0){
-								ArrayList<Double> list = new ArrayList<Double>();
-								for (int t = 0; t != aMatrix.length; t ++){
-									list.add(aMatrix[i][t]);
-									aMatrix[i][t] = aMatrix[position][t];
-									aMatrix[position][t] = list.get(t);
-								}
-								i = position;
-								aMatrix[i][j] /= aMatrix[i][j];
-							}
-						}
-					}
-					testing --;
-				}
-				/* Creating RREF */
-				for (int t = 0; i < aMatrix.length; i ++){
-					for (int j = 0; j != aMatrix[0].length; j ++){
-						if(t != i && aMatrix[t][topColoum] != 0){
-							if(valueToMultiply == 0){
-								valueToMultiply = aMatrix[t][topColoum];
-							}
-							aMatrix[t][j] = aMatrix[t][j] - aMatrix[i][j] * valueToMultiply;
-						}
-					}
-				}
-			}
-			x --;
-		}
-		double[][] RREF = new double[aMatrix.length][aMatrix[0].length];
-		for (int i = 0; i < aMatrix.length; i ++){
-			for (int j = 0; j < aMatrix[0].length; j ++){
-				RREF[i][j] = aMatrix[i][j];
-			}
-        	}
-		return RREF;
+        int rows = aMatrix.length;
+        int cols = rows + 1;
+        // 1. set c[row][row] equal to 1
+        double factor = aMatrix[row][row];
+        for (int col=0; col<cols; col++){
+            aMatrix[row][col] /= factor;
 	}
-						
+        // 2. set c[row][row2] equal to 0
+        for (int row2=0; row2<rows; row2++){
+            if (row2 != row) {
+                factor = -aMatrix[row2][row];
+                for (int col=0; col<cols; col++){
+                    aMatrix[row2][col] += factor * aMatrix[row][col];
+		}
+            }
+	}
+	}
 					
 	
 	public void resetArray()
