@@ -11,12 +11,10 @@ public class Matrix
 	
 	private int column = 0;
 	
-	int row = 0;
+	private int row = 0; 
 	
-	int size;
-	
-	private double [][] result;
-	
+	private int [] size;
+		
 	public Matrix()
 	
 		{
@@ -45,7 +43,7 @@ public class Matrix
 			
 			setColumn(inMatrix.getColumn());
 			
-			setMatrix(inMatrix.getMatrix());
+			setMatrixWithArray(inMatrix.getMatrix());
 			
 		}
 	
@@ -53,7 +51,7 @@ public class Matrix
 	
 		{
 		
-		setMatrix(inArray);
+			setMatrixWithArray(inArray);
 	
 		}
 	
@@ -73,32 +71,35 @@ public class Matrix
 	
 	
 	
-	public void setRow(int inRow)
 	
-		{
-		
-			row = inRow; 
-		
-		}
+	  public void setRow(int inRow)
+	  
+		  {
+		  
+			  row = inRow;
+		  
+		  }
+	  
+	  public void setColumn(int inColumn)
+	  
+		  {
+		  
+			  column = inColumn;
+		  
+		  
+		  }
+	 
 	
-	public void setColumn(int inColumn)
-	
-		{
-	
-			column = inColumn; 
-	
-		
-		}
-	
-	
-	
-	public int getRow()
-	
-		{
-			int tempRow = row;
-			 
-			return tempRow;
-		}
+	  public int getRow()
+	  
+	  { 
+		 
+		  int tempRow = row;
+	  
+		  return tempRow; 
+	  
+	  }
+	 
 	
 	public int getColumn()
 	
@@ -111,19 +112,58 @@ public class Matrix
 		
 		}
 	
-	public void setMatrix(double [][] inMatrix)
+	public void setMatrix(Matrix inMatrix)
 	
 		{
 			
-			row = inMatrix.length;
+		/*
+		 * size[0] = row;
+		 * 
+		 * size[1] = column;
+		 */
 			
-			column = inMatrix[0].length;
-			
-			aMatrix = inMatrix; 
+			setMatrixWithArray(inMatrix.getMatrix()); 
 		
 		}
 	
+	public void setMatrixWithArray(double [][] inMatrix)
+	
+		{
+			
+		/*
+		 * size[0] = row;
+		 * 
+		 * size[1] = column;
+		 */
+			
+			aMatrix = inMatrix;
 		
+			row = inMatrix.length;
+		
+			column = inMatrix[0].length;
+		
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+	
+	public void setSize(int aRow, int aColumn) 
+		
+		{
+			size[0] = aRow;
+			
+			size[1] = aColumn; 
+		
+		}
+	
+	
 	public void getMatrixFromUser()
 	
 		{
@@ -199,7 +239,7 @@ public class Matrix
 			
 		}
 		
-			setMatrix(aMatrix);
+			setMatrixWithArray(aMatrix);
 		
 		
 		
@@ -208,11 +248,11 @@ public class Matrix
 	
 	
 	
-	public double[][] transpose(Matrix inMatrix)// CODE FROM https://stackoverflow.com/questions/15449711/transpose-double-matrix-with-a-java-function
+	public double[][] transpose()// CODE FROM https://stackoverflow.com/questions/15449711/transpose-double-matrix-with-a-java-function
 	
 		{
 		
-			double [][] arrayFromInMatrix = inMatrix.getMatrix();
+			double [][] arrayFromInMatrix = getMatrix();
 		
 			double[][] temp = new double[arrayFromInMatrix[0].length][arrayFromInMatrix.length];
 	       
@@ -222,49 +262,143 @@ public class Matrix
 	                
 					temp[j][i] = arrayFromInMatrix[i][j];
 	        
+			//setResult(temp);
+			
 			return temp;
 	
 		}
 	
 	
-	/*
-	 * public double [][] addition(Matrix inMatrix)
-	 * 
-	 * {
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * }
-	 */
+	
+	  public double [][] addition(Matrix inMatrix)
+	  
+	  {
+	  
+		  if ((row == inMatrix.getRow()) && (column == inMatrix.getColumn()))
+			  
+			  
+		  {
+			  double [][] thisArray = getMatrix();
+			  
+			  double [][] inArray = inMatrix.getMatrix(); 
+			  
+			  for (int i = 0; i < thisArray.length; i++)
+		            
+					for (int j = 0; j < thisArray[0].length; j++)
+					
+						{
+							
+							thisArray[i][j] = thisArray[i][j] + inArray[i][j];
+						
+						}
+		  
+			  
+			  //setResult(thisArray);
+		  
+		  
+		  
+		  
+			  return thisArray;
+		  }else {
+			  
+			  
+			  return null;
+		  
+		  
+		  }
+	  
+	  
+	  }
+	 
 	
 	
-	/*
-	 * public double [][] subtraction(Matrix inMatrix)
-	 * 
-	 * {
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * }
-	 */
 	
-	/*
-	 * public double [][] multiplication(Matrix inMatrix)
-	 * 
-	 * {
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * }
-	 */
+	  public double [][] subtraction(Matrix inMatrix)
+	  
+	  {
+		  
+		  if ((row == inMatrix.getRow()) && (column == inMatrix.getColumn()))
+		  
+		  
+		  {
+			  double [][] thisArray = getMatrix();
+			  
+			  double [][] inArray = inMatrix.getMatrix(); 
+			  
+			  for (int i = 0; i < thisArray.length; i++)
+		            
+					for (int j = 0; j < thisArray[0].length; j++)
+					
+						{
+							
+							thisArray[i][j] = thisArray[i][j] - inArray[i][j];
+						
+						}
+		  
+			  
+			  //setResult(thisArray);
+		  
+		  
+		  
+		  
+			  return thisArray;
+		  }else {
+			  
+			  
+			  return null;
+		  
+		  
+		  }
+		  
+	  
+	  
+		  
+	  }
+	 
+	
+	
+	
+	  public double [][] multiplication(Matrix inMatrix)
+	  
+	  {
+		  if (column == inMatrix.getRow())
+				  
+		  		{
+			  
+					double [][] tempArray = new double [row][inMatrix.getColumn()];
+				  	
+			/*
+			 * System.out.println(column); System.out.println(inMatrix.getRow());
+			 */
+					
+					double[][] thisArray = getMatrix(); 
+					
+					double[][] thatArray = inMatrix.getMatrix(); 
+					
+					
+					////FROM  https://stackoverflow.com/questions/17623876/matrix-multiplication-using-arrays
+					for (int i = 0; i < getRow(); i++)
+						for (int j = 0; j < inMatrix.getColumn(); j++)
+							for (int k = 0; k < getColumn() ; k++)
+								tempArray[i][j] += thisArray[i][k] * thatArray[k][j];
+								
+
+					return tempArray;
+
+		  		
+		  		
+		  		}else {
+		  			
+		  			return null;
+		  		}
+	  
+		  
+	  
+	  
+	  
+	  }
+	 
+	 
 	
 	
 	public double [][] multiplicationScalar(int scalar)
@@ -280,6 +414,8 @@ public class Matrix
 			for (int j = 0; j < array[0].length; j++)
                 
 				temp[i][j] = array[i][j*scalar];
+		
+		//setResult(temp);
 		
 		return temp; 
 		
@@ -314,6 +450,43 @@ public class Matrix
 	 */
 	
 	
+	
+	public double [][] reducedRowEcheleon(Matrix inMatrix){
+		int REF = 0;
+        	int row = 0;
+        	int coloum = 0;
+        	while (row < aMatrix.length && REF < aMatrix.length && REF < aMatrix[0].length){
+            		double division = aMatrix[REF][REF];
+            		while (coloum < aMatrix[0].length){
+                		if(aMatrix[REF][REF] != 0){
+                    			aMatrix[REF][coloum] /= division;
+                    			coloum ++;
+                		}
+            		}
+            
+           		if (row + 1 < aMatrix.length){
+                		for(int i = row + 1; i < aMatrix.length; i ++){
+                    			double multiplier = aMatrix[i][REF];
+                    			for(int j = REF; j < aMatrix[0].length; j ++){
+                        			aMatrix[i][j] -= (multiplier * aMatrix[row][REF]);
+                    			} 
+               			}
+            		}
+            	coloum = 0;
+            	row ++;
+           	REF ++;
+        	}
+		return aMatrix;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void resetArray()
 	
 		{
@@ -321,7 +494,7 @@ public class Matrix
 		
 			double [][] tempArray = new double[row][column];
 			
-			setMatrix(tempArray);
+			setMatrixWithArray(tempArray);
 		
 		
 		}
@@ -354,8 +527,10 @@ public class Matrix
 			s += "\n";
 			
 		}
+		
 		return s;
 	} 
+	
 	
 	
 	/*
@@ -369,38 +544,48 @@ public class Matrix
 	 * }
 	 */
 	
-	public void setResult(double[][] aMatrix){
-		result = new double [aMatrix.length][aMatrix[0].length];
-		double val = 0;
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < col; j++) {
-                		result[i][j] = aMatrix[i][j];
-			}
-		}
-		return result;
-	}
+	/*
+	 * public void setResult(double[][] aMatrix)
+	 * 
+	 * {
+	 * 
+	 * result = aMatrix;
+	 * 
+	 * }
+	 */
+
+
+
+	/*
+	 * public double [][] getResult()
+	 * 
+	 * {
+	 * 
+	 * double [][] temp = result;
+	 * 
+	 * return temp;
+	 * 
+	 * }
+	 */
+	
+	
+	
+	
+//	public static void main(String [] args) 
+//	
+//	{
+//	
+//		Matrix A = new Matrix();
+//		
+//		Matrix B = new Matrix ();
+//		
+//		Matrix C = new Matrix(A.multiplication(B));
+//		
+//		System.out.println(C.toString());
+//		
+//	}
+
+
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
