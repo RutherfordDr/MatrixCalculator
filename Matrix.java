@@ -302,7 +302,7 @@ public class Matrix
 		int REF = 0;
         	int row = 0;
         	int coloum = 0;
-        	while (row < aMatrix.length && REF < RREF.length && REF < RREF[0].length){
+        	while (row < aMatrix.length && REF < aMatrix.length && REF < aMatrix[0].length){
             		double division = aMatrix[REF][REF];
             		while (coloum < aMatrix[0].length){
                 		if(aMatrix[REF][REF] != 0){
