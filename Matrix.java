@@ -297,39 +297,34 @@ public class Matrix
 	 * 
 	 * }
 	 */
-	
-	//Taken from https://stackoverflow.com/questions/19940740/gaussian-elimination-java (change later)
+	// Currently works perfectly for RREF except when the matrix is not in leading one order.
 	public double [][] reducedRowEcheleon(Matrix inMatrix){
-        int rows = aMatrix.length;
-        int cols = rows + 1;
-        // 1. set c[row][row] equal to 1
-        double factor = aMatrix[row][row];
-        for (int col=0; col<cols; col++){
-            aMatrix[row][col] /= factor;
+		int REF = 0;
+        	int row = 0;
+        	int coloum = 0;
+        	while (row < aMatrix.length && REF < RREF.length && REF < RREF[0].length){
+            		double division = aMatrix[REF][REF];
+            		while (coloum < aMatrix[0].length){
+                		if(aMatrix[REF][REF] != 0){
+                    			aMatrix[REF][coloum] /= division;
+                    			coloum ++;
+                		}
+            		}
+            
+           		if (row + 1 < aMatrix.length){
+                		for(int i = row + 1; i < aMatrix.length; i ++){
+                    			double multiplier = aMatrix[i][REF];
+                    			for(int j = REF; j < aMatrix[0].length; j ++){
+                        			aMatrix[i][j] -= (multiplier * aMatrix[row][REF]);
+                    			} 
+               			}
+            		}
+            	coloum = 0;
+            	row ++;
+           	REF ++;
+        	}
+		return aMatrix;
 	}
-        // 2. set c[row][row2] equal to 0
-        for (int row2=0; row2<rows; row2++){
-            if (row2 != row) {
-                factor = -aMatrix[row2][row];
-                for (int col=0; col<cols; col++){
-                    aMatrix[row2][col] += factor * aMatrix[row][col];
-		}
-            }
-	}
-	}
-					
-	
-	public void resetArray()
-	
-		{
-			
-		
-			double [][] tempArray = new double[row][column];
-			
-			setMatrix(tempArray);
-		
-		
-		}
 	
 	
 	public String toString(){    //FROM https://www.dreamincode.net/forums/topic/379950-making-a-tostring-method-for-2d-integer-array/
