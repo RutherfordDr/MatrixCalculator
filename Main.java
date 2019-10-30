@@ -1,30 +1,79 @@
 import java.util.Scanner;
+public class Main {
 
-public class Main{
-	static boolean scientific = false;
+	public static void main(String[] args) 
 	
-  public static void main(String args []){
-    System.out.println("Input 1 for basic calculator");
-    System.out.println("Input 2 for scientific calculator");
-    System.out.println("Input 3 for matrix calculator");
-    Scanner input = new Scanner(System.in);
-    int variable = input.nextInt();
-    if (variable == 1){
-      //Basic calculations
-      BasicCalculator bc = new BasicCalculator();
-    } else if (variable ==2) {
-      //Scientific calculations (Incomplete)
-    	scientific = true;
-      ScientificCalculatorTUI sc = new ScientificCalculatorTUI();
-      sc.start();
-      //Matrix calculations (Incomplete)
-     
-    } else if ( variable == 3) {
-    	 Matrix m = new Matrix();
-      
-    } else {
-    	System.out.println("Out of bounds input");
-    }
-    
-  }
-}
+	{
+		
+		Scanner scanner = new Scanner(System.in);
+		
+		double [][] temp = new double[1][1]; 
+		
+		Matrix A = new Matrix(temp);
+		
+		Matrix B = new Matrix (temp);
+		
+		Matrix C = new Matrix(temp);
+		
+		Matrix D = new Matrix(temp);
+		
+		Matrix E = new Matrix (temp);
+		
+		Matrix F = new Matrix(temp);
+		
+	
+		
+		A.getMatrixFromUser();
+		
+		System.out.println("1 - Transpose/n2 - Addition/n3-Subtraction/n4-Multiplication/n5-Multiply by Scalar");
+		
+		int choice = scanner.nextInt();
+		
+		if (choice == 1)
+		
+		{
+			
+			B.setMatrixWithArray(A.transpose());
+				
+			B.toString();
+		
+		
+		
+		}else if(choice == 2){
+			
+			C.getMatrixFromUser();
+			
+			D.setMatrixWithArray(A.addition(C));
+			
+			D.toString();
+				
+		
+		}else if(choice == 3){
+			
+			C.getMatrixFromUser();
+			
+			D.setMatrixWithArray(A.addition(C));
+			
+			D.toString();
+		
+		
+		
+		
+		
+		}else if(choice == 4){
+			
+			
+		
+		
+		
+		
+		
+		}else if(choice == 5){
+			
+			
+		
+		
+		
+		
+		
+		}
