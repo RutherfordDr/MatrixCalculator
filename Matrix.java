@@ -297,34 +297,47 @@ public class Matrix
 	 * 
 	 * }
 	 */
-	
-	
-	/*
-	 * public double [][] reducedRowEcheleon(Matrix inMatrix)
-	 * 
-	 * {
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * }
-	 */
-	
-	
-	public void resetArray()
-	
-		{
-			
-		
-			double [][] tempArray = new double[row][column];
-			
-			setMatrix(tempArray);
-		
-		
-		}
+	// Currently works perfectly for most test cases
+	public double [][] reducedRowEcheleon(Matrix inMatrix){
+		int REF = 0;
+        	int row = 0;
+        	int coloum = 0;
+        	double count = 0;
+
+        	while (row < aMatrix.length && REF < aMatrix.length && REF < aMatrix[0].length){
+            		double division = aMatrix[REF][REF];
+            		while (coloum < aMatrix[0].length){
+				//Making the leading one
+                		if(aMatrix[REF][REF] != 0){
+                    			aMatrix[REF][coloum] /= division;
+                    			coloum ++;
+                		}
+				//Switching places if placement is zero
+				else if (aMatrix[REF][REF] == 0 && (REF + 1) < aMatrix[0].length){
+                    			for (int i = coloum; i < aMatrix[0].length; i ++){
+                        		double temp = aMatrix[REF][i];
+                        		aMatrix[REF][i] = aMatrix[REF+1][i];
+                        		aMatrix[REF + 1][i] = temp;
+                        		division = aMatrix[REF][REF];
+                    			}
+                		}
+			}
+			//Creating zero's under the leading one
+            		if (row + 1 < aMatrix.length){
+                		for(int i = row + 1; i < aMatrix.length; i ++){
+                    			double multiplier = aMatrix[i][REF];
+                    			for(int j = REF; j < aMatrix[0].length; j ++){
+                        			aMatrix[i][j] -= (multiplier * aMatrix[row][REF]);
+                    			} 
+                		}
+            		}
+			//To get it to repeat for each row
+            		coloum = 0;
+            		row ++;
+           		REF ++;
+        	}
+		return aMatrix;
+	}
 	
 	
 	public String toString(){    //FROM https://www.dreamincode.net/forums/topic/379950-making-a-tostring-method-for-2d-integer-array/
