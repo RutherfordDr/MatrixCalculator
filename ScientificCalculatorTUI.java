@@ -22,6 +22,7 @@ public class ScientificCalculatorTUI {
 		this.scientificCalculator = new ScientificCalculator();
 		running = true;
 		writingEquation = true;
+		start();
 	}
 	
 	public void start() {
@@ -115,21 +116,26 @@ public class ScientificCalculatorTUI {
 				displayEquation();
 				break;
 			case "log":
-				scientificCalculator.updateEquationString(" log(");
+				scientificCalculator.updateEquationString("log (");
 				promptForNumber();
 				displayEquation();
 				break;
 			case "ln":
-				scientificCalculator.updateEquationString(" ln(");
+				scientificCalculator.updateEquationString("ln (");
 				promptForNumber();
 				displayEquation();
 				break;
 			case "^2":
-				scientificCalculator.updateEquationString(" ^(2) ");
+				scientificCalculator.updateEquationString(" ^ ( 2 ) ");
+				displayEquation();
+				break;
+			case "sqrt":
+				scientificCalculator.updateEquationString("sqrt ( ");
+				promptForNumber();
 				displayEquation();
 				break;
 			case "^":
-				scientificCalculator.updateEquationString(" ^(");
+				scientificCalculator.updateEquationString(" ^ ( ");
 				promptForNumber();
 				displayEquation();
 				break;
@@ -147,17 +153,17 @@ public class ScientificCalculatorTUI {
 				displayEquation();
 				break;
 			case "sin":
-				scientificCalculator.updateEquationString(" sin(");
+				scientificCalculator.updateEquationString(" sin ( ");
 				promptForNumber();
 				displayEquation();
 				break;
 			case "cos":
-				scientificCalculator.updateEquationString(" cos(");
+				scientificCalculator.updateEquationString(" cos ( ");
 				promptForNumber();
 				displayEquation();
 				break;
 			case "tan":
-				scientificCalculator.updateEquationString(" tan(");
+				scientificCalculator.updateEquationString(" tan ( ");
 				promptForNumber();
 				displayEquation();
 				break;
