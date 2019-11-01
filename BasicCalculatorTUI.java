@@ -6,6 +6,7 @@ public class BasicCalculatorTUI extends BasicCalculator{
 	private boolean running;
 	private static String operation = "";
 	private boolean equals = false;
+	private String op ="";
 	
 	public BasicCalculatorTUI() {
 		this.BasicCalculator = new BasicCalculator();
@@ -14,7 +15,6 @@ public class BasicCalculatorTUI extends BasicCalculator{
 	}
 	
 	public void start() {
-		operation = "";
 		while (running) {
 			promptForNumber();
 		}
@@ -41,24 +41,24 @@ public class BasicCalculatorTUI extends BasicCalculator{
 		
 		int i = 1;
 		while (i!=0) {
-		String numin = null;
-		while(numin == null){
-			System.out.print("Enter a number:");
-			Scanner scanner = new Scanner(System.in);
-			if (scanner.hasNextDouble()){
-				numin = scanner.nextLine();
-			} else {
-				System.out.println("Input number");
-				System.out.println();
-			}
-		}
 		
-		
-		operation += numin;
-		System.out.println(operation);
-		
+			
+			// OPERATION OR NUMBER
 		displayOptions();
-		optionInput();
+		System.out.print("Enter an operation or number: ");
+		Scanner scanner = new Scanner(System.in);
+		String numin = scanner.nextLine();
+		
+		if (isNumeric(numin) == true) {
+			operation+=numin;
+			System.out.println(operation);
+			continue;
+		}
+		else {
+			op = numin;
+			optionInput();
+			System.out.println(operation);
+		}
 		
 			if (equals == true) {
 				computeResult();
@@ -66,6 +66,8 @@ public class BasicCalculatorTUI extends BasicCalculator{
 				i = 0;
 				running = false;
 			}
+		System.out.println("\033[H\033[2J");
+		System.out.println(operation);
 		}
 	}
 	
@@ -81,27 +83,16 @@ public class BasicCalculatorTUI extends BasicCalculator{
 	}
 	
 	public void optionInput() {
-		System.out.println("Enter an arithmetic operation or equal: ");
-		Scanner scannerop = new Scanner(System.in);
-		String op = scannerop.nextLine();
 		String ops = BasicCalculator.BasicOperations(op);
 		if (ops == "notvalid") {
-			System.out.print("Last input errased. Enter a valid operation");
+			System.out.print("Last input errased. Enter a valid operation. ");
 			optionInput();
 		}
 		else if (ops == " = "){
 			equals = true;
 		}
-		else if (ops != " )" && ops != "( ") {
+		else {
 			operation += ops;
-			System.out.println(operation);
-		} else if (ops == " )") {
-			operation += ops;
-			System.out.println(operation);
-			optionInput();
-		} else {
-			operation += " * " + ops;
-			System.out.println(operation);
 		}
 		
 	}
