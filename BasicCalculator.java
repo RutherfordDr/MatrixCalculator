@@ -26,9 +26,9 @@ public class BasicCalculator {
 		case "/":
 			return " / ";
 		case "(":
-			return " ( ";
+			return "( ";
 		case ")":
-			return " ) ";
+			return " )";
 		default:
 			System.out.println("Operation not valid.");
 			return "notvalid";

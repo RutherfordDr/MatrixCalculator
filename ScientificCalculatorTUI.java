@@ -32,7 +32,7 @@ public class ScientificCalculatorTUI {
 		}
 		System.out.println("Would you like to enter another equation Y/N");
 		Scanner scanner = new Scanner(System.in);
-		String procede = scanner.next();
+		String procede = scanner.nextLine();
 		if (procede.equals("Y")){
 			scientificCalculator.resetEquationString();
 			running = true;
@@ -85,13 +85,12 @@ public class ScientificCalculatorTUI {
 		System.out.println("Enter the corresponding arithmetic option or number.");
 		Scanner scanner = new Scanner(System.in);
 		
+		
 		if (scanner.hasNextDouble()) {
 			String input = scanner.next();
-			
 			scientificCalculator.updateEquationString(input);
 			displayEquation();
 		} else {
-		
 		String input = scanner.next();	
 		switch (input) {
 			case "=":
