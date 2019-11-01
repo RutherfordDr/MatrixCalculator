@@ -152,6 +152,14 @@ public class BasicCalculator {
 		String resString = solve(ops);
 		result = Double.parseDouble(resString);
 	}
+	
+		public void computeResultGUI() {
+		operation = BasicCalculatorGUI.getOperationGUI();
+		ArrayList<String> ops= new ArrayList<String>();
+		ops = parseEquation(operation);
+		String resString = solve(ops);
+		result = Double.parseDouble(resString);
+	}
 		
 	public double getResult() {
 		return result;
