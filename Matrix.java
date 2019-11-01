@@ -327,12 +327,15 @@ public class Matrix
 			for (int j = 0; j < column; j++) 
 				first[i][j] = scanner.nextInt();
 				
+		System.out.println("Row: "+ row + "\t" + "Enter the number columns for second matrix");
+      		n = sc.nextInt();		
+				
 		for (int i = 0; i < row; i++) 
 			for (int j = 0; j < column; j++) 
 				second[i][j] = scanner.nextInt();
 				
 	   	for (int i = 0; i < row; i++) {
-			for (int j = 0; j < column; j++) {
+			for (int j = 0; j < n; j++) {
 				for (int k = 0; k < row; k++) {
 				
 				val = val + aMatrix[i][k] * second[k][j];
