@@ -14,6 +14,7 @@ public class BasicCalculatorTUI extends BasicCalculator{
 	}
 	
 	public void start() {
+		operation = "";
 		while (running) {
 			promptForNumber();
 		}
@@ -40,10 +41,19 @@ public class BasicCalculatorTUI extends BasicCalculator{
 		
 		int i = 1;
 		while (i!=0) {
+		String numin = null;
+		while(numin == null){
+			System.out.print("Enter a number:");
+			Scanner scanner = new Scanner(System.in);
+			if (scanner.hasNextDouble()){
+				numin = scanner.nextLine();
+			} else {
+				System.out.println("Input number");
+				System.out.println();
+			}
+		}
 		
-		System.out.print("Enter a number:");
-		Scanner scanner = new Scanner(System.in);
-		String numin = scanner.nextLine();
+		
 		operation += numin;
 		System.out.println(operation);
 		
@@ -82,8 +92,15 @@ public class BasicCalculatorTUI extends BasicCalculator{
 		else if (ops == " = "){
 			equals = true;
 		}
-		else {
+		else if (ops != " )" && ops != "( ") {
 			operation += ops;
+			System.out.println(operation);
+		} else if (ops == " )") {
+			operation += ops;
+			System.out.println(operation);
+			optionInput();
+		} else {
+			operation += " * " + ops;
 			System.out.println(operation);
 		}
 		

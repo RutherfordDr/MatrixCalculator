@@ -24,7 +24,7 @@ import java.lang.Math;
 public class ScientificCalculator extends BasicCalculator{
 	private boolean radians;
 	private double previousAnswer;
-	private String equationString;
+	protected String equationString;
 	private ArrayList<String> arithmeticOptions;
 	
 	
@@ -66,10 +66,6 @@ public class ScientificCalculator extends BasicCalculator{
 	
 	public void updateEquationString(String update) {
 		equationString = equationString + update;
-	}
-	
-	public void resetEquationString() {
-		equationString = "";
 	}
 	
 	
@@ -334,7 +330,10 @@ public class ScientificCalculator extends BasicCalculator{
 		return "Not valid equation.";
 		}
 				
-	
+		public void resetEquationString() {
+			equationString = "";
+		}
+		
 	/*
 	 * The following methods are arithmetic methods for the scientific calculator.
 	 */
