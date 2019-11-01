@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class ScientificCalculatorTUI {
 	private ScientificCalculator scientificCalculator;
 	private boolean running;
+	private boolean TUIrunning;
 	private boolean writingEquation;
 	
 	/*public static void main(String[] args) {
@@ -21,27 +22,38 @@ public class ScientificCalculatorTUI {
 	public ScientificCalculatorTUI() {
 		this.scientificCalculator = new ScientificCalculator();
 		running = true;
+		TUIrunning = true;
 		writingEquation = true;
+		
 		start();
-	}
-	
-	public void start() {
-		displayOptions();
-		while (running) {
-			promptForEquation();
-		}
-		System.out.println("Would you like to enter another equation Y/N");
-		Scanner scanner = new Scanner(System.in);
-		String procede = scanner.nextLine();
-		if (procede.equals("Y")){
-			scientificCalculator.resetEquationString();
-			running = true;
-			writingEquation = true;
-			start();
-		} 
 		
 	}
 	
+	public void start() {
+		while (TUIrunning) {
+			displayOptions();
+			while (running) {
+				promptForEquation();
+			}
+			promptToQuit();}
+
+	}
+	
+	public void promptToQuit() {
+		 System.out.println("Would you like to enter another equation Y/N");
+		 Scanner scanner = new Scanner(System.in);
+		 String procede = scanner.next();
+		 if (procede.equals("N")){
+			TUIrunning = false;
+		} else if (procede.equals("Y") ) {
+				scientificCalculator.resetEquationString();
+				running = true;
+				writingEquation = true;
+				start();
+		} else {
+				promptToQuit();
+			}
+	 }
 	/*
 	 * Displays the arithmetic options in a list.
 	 * 	Ex:
