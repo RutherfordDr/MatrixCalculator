@@ -1,7 +1,7 @@
 public class BasicCalculatorGUI extends BasicCalculator{
 
 	private BasicCalculator BasicCalculator;
-	private String operation = "";
+	public static String operation = "";
 	public String temp;
 	
 	public BasicCalculatorGUI() {
@@ -40,8 +40,13 @@ public class BasicCalculatorGUI extends BasicCalculator{
 	}
 	
 	public double equals() {
-		computeResult();
+		computeResultGUI();
 		return result;
 		
 	}
+	
+	public static String getOperationGUI() {
+		return operation;
+	}
+	
 }
