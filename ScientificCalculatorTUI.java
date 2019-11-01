@@ -36,6 +36,7 @@ public class ScientificCalculatorTUI {
 				promptForEquation();
 			}
 			promptToQuit();}
+
 	}
 	
 	public void promptToQuit() {
@@ -96,13 +97,12 @@ public class ScientificCalculatorTUI {
 		System.out.println("Enter the corresponding arithmetic option or number.");
 		Scanner scanner = new Scanner(System.in);
 		
+		
 		if (scanner.hasNextDouble()) {
 			String input = scanner.next();
-			
 			scientificCalculator.updateEquationString(input);
 			displayEquation();
 		} else {
-		
 		String input = scanner.next();	
 		switch (input) {
 			case "=":

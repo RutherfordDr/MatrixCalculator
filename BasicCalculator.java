@@ -26,9 +26,9 @@ public class BasicCalculator {
 		case "/":
 			return " / ";
 		case "(":
-			return " ( ";
+			return "( ";
 		case ")":
-			return " ) ";
+			return " )";
 		default:
 			System.out.println("Operation not valid.");
 			return "notvalid";
@@ -147,6 +147,14 @@ public class BasicCalculator {
 	
 	public void computeResult() {
 		operation = BasicCalculatorTUI.getOperation();
+		ArrayList<String> ops= new ArrayList<String>();
+		ops = parseEquation(operation);
+		String resString = solve(ops);
+		result = Double.parseDouble(resString);
+	}
+	
+		public void computeResultGUI() {
+		operation = BasicCalculatorGUI.getOperationGUI();
 		ArrayList<String> ops= new ArrayList<String>();
 		ops = parseEquation(operation);
 		String resString = solve(ops);
