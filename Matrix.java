@@ -316,17 +316,34 @@ public class Matrix
 	}
 	
 	/*
-	 * public double [][] multiplication(Matrix inMatrix)
-	 * 
-	 * {
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * }
+	   public double [][] multiplication() {
+	   	double[][] first = new double[row][column];
+	   	double[][] second = new double[row][column];
+		double[][] multiply = new multiply[row][column];
+		Scanner sc = new Scanner(System.in);
+		
+	double val = 0;
+		for (int i = 0; i < row; i++) 
+			for (int j = 0; j < column; j++) 
+				first[i][j] = scanner.nextInt();
+				
+		for (int i = 0; i < row; i++) 
+			for (int j = 0; j < column; j++) 
+				second[i][j] = scanner.nextInt();
+				
+	   	for (int i = 0; i < row; i++) {
+			for (int j = 0; j < column; j++) {
+				for (int k = 0; k < row; k++) {
+				
+				val = val + aMatrix[i][k] * second[k][j];
+				}
+			multiply[i][j] = val;
+			}
+		}
+		return multiply;
+	}
+			
+	
 	 */
 	
 	
