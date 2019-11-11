@@ -330,13 +330,17 @@ public class ScientificCalculator extends BasicCalculator{
 		return "Not valid equation.";
 		}
 				
-		public void resetEquationString() {
-			equationString = "";
+	public void resetEquationString() {
+		equationString = "";
 		}
 		
 	/*
 	 * The following methods are arithmetic methods for the scientific calculator.
 	 */
+	
+	public double pi() {
+		return Math.PI;
+	}
 	
 	public double squared(double input) {
 		return input*input;

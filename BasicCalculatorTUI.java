@@ -29,10 +29,19 @@ public class BasicCalculatorTUI extends BasicCalculator{
 		} 
 		
 		else if (procede.equals("N")) {
-			running=false;
+			closeHistory();
+			System.out.println("Would you like to view the session history?");
+			if (scanner.next().equals("Y")) {
+				readHistory();
+				running = false;
+			} else {
+				running = false;
+			}
+		
 		}
 		else {
 			System.out.println("Invalid input. Program terminated.");
+			closeHistory();
 			running=false;
 		}
 	}
@@ -62,6 +71,7 @@ public class BasicCalculatorTUI extends BasicCalculator{
 		
 			if (equals == true) {
 				computeResult();
+				
 				System.out.println("Result is: " + getResult());
 				i = 0;
 				running = false;
