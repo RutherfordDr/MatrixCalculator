@@ -1,16 +1,24 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.io.*;
 
 public class BasicCalculator {
-	
-	String operation = "";
-	double result;
-	private double previousAns=0;
+	private ArrayList<String> sessionHistory = new ArrayList<String>();
+	private String operation = "";
+	private double result;
+	private String previousAns= "0";
+	private String filename = "basicCalculatorHistory.txt";
 	
 	public BasicCalculator() {
 		
 		
+	}
+	
+	public void setPreviousAns(String ans) {
+		if (isNumeric(ans)) {
+			previousAns = ans;
+		}
 	}
 	
 	public String BasicOperations(String ops) {
@@ -51,9 +59,9 @@ public class BasicCalculator {
 		if (equationList.size() == 1) {
 			String input = equationList.get(0);
 			if (isNumeric(input)){
+				setPreviousAns(input);
+				writeToHistory();
 				return input;
-			} else if (input.equals("pi")){
-				return Double.toString(pi());
 			} else {
 				System.out.println(equationList);
 				return "Not valid equation.";
@@ -131,11 +139,7 @@ public class BasicCalculator {
 			}
 		return "Not valid equation.";
 		}
-	
-	public double pi() {
-		return Math.PI;
-	}
-	
+
 	public static boolean isNumeric(String strNum) {
 	    try {
 	        double d = Double.parseDouble(strNum);
@@ -153,7 +157,7 @@ public class BasicCalculator {
 		result = Double.parseDouble(resString);
 	}
 	
-		public void computeResultGUI() {
+	public void computeResultGUI() {
 		operation = BasicCalculatorGUI.getOperationGUI();
 		ArrayList<String> ops= new ArrayList<String>();
 		ops = parseEquation(operation);
@@ -164,4 +168,47 @@ public class BasicCalculator {
 	public double getResult() {
 		return result;
 	}
+
+	public void writeToHistory() {
+		PrintWriter outputStream = null;
+		try {
+			outputStream = new PrintWriter(new FileOutputStream(filename, true));
+			outputStream.println(operation);
+			outputStream.println(previousAns);
+			outputStream.close();
+			
+		}
+		catch(FileNotFoundException e) {
+			System.out.println("Can't save to session history");
+		}
+	}
+
+	public void closeHistory() {
+		PrintWriter outputStream = null;
+		try {
+			outputStream = new PrintWriter(new FileOutputStream(filename, true));
+			outputStream.println("Session Ended");
+			outputStream.close();
+			
+		}
+		catch(FileNotFoundException e) {
+			System.out.println("Can't save to session history");
+		}
+		
+	}
+
+	public void readHistory() {
+		Scanner inputStream = null;
+		try {
+			inputStream = new Scanner(new File(filename));
+			while (inputStream.hasNext()) {
+				String line = inputStream.nextLine();
+				System.out.println(line);
+				}
+			}
+		catch(FileNotFoundException e) {
+			System.out.println("No history available.");
+			}
+		}
+	
 }
