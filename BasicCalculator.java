@@ -8,6 +8,7 @@ public class BasicCalculator {
 	private String operation = "";
 	private double result;
 	private String previousAns= "0";
+	private String previousEquation = "";
 	private String filename = "basicCalculatorHistory.txt";
 	
 	public BasicCalculator() {
@@ -19,6 +20,18 @@ public class BasicCalculator {
 		if (isNumeric(ans)) {
 			previousAns = ans;
 		}
+	}
+	
+	public String getPreviousAns() {
+		return previousAns;
+	}
+	
+	public void setPreviousEquation(String equation) {
+		previousEquation = equation;
+	}
+	
+	public String getPreviousEquation() {
+		return previousEquation;
 	}
 	
 	public String BasicOperations(String ops) {
@@ -37,6 +50,10 @@ public class BasicCalculator {
 			return "( ";
 		case ")":
 			return " )";
+		case "previousAns":
+			return getPreviousAns();
+		case "previousEquation":
+			return getPreviousEquation();
 		default:
 			System.out.println("Operation not valid.");
 			return "notvalid";
@@ -52,7 +69,6 @@ public class BasicCalculator {
 			}
 		}
 		return cleanedUpEquation;
-		
 	}
 	
 	public String solve(ArrayList<String> equationList) {
@@ -162,6 +178,7 @@ public class BasicCalculator {
 		ArrayList<String> ops= new ArrayList<String>();
 		ops = parseEquation(operation);
 		String resString = solve(ops);
+		
 		result = Double.parseDouble(resString);
 	}
 		

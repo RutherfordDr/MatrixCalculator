@@ -3,8 +3,10 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Scanner;
-
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.lang.Math;
 
 /*
@@ -26,11 +28,13 @@ public class ScientificCalculator extends BasicCalculator{
 	private double previousAnswer;
 	protected String equationString;
 	private ArrayList<String> arithmeticOptions;
-	
+	private String previousEquation;
+	private String filename = "scientificCalculatorHistory.txt";
 	
 	public ScientificCalculator() {
 		radians = true;
 		equationString = "";
+		previousEquation = "";
 		previousAnswer = 0.0;
 		arithmeticOptions = new ArrayList<String>();
 		arithmeticOptions.add("equals \"=\"");
@@ -49,6 +53,8 @@ public class ScientificCalculator extends BasicCalculator{
 		arithmeticOptions.add("tan \"tan\" ");
 		arithmeticOptions.add("( \"(\" ");
 		arithmeticOptions.add(") \")\" ");
+		arithmeticOptions.add("previousEquation");
+		arithmeticOptions.add("previousAnswer");
 		
 	}
 	
@@ -64,8 +70,12 @@ public class ScientificCalculator extends BasicCalculator{
 		return arithmeticOptions;
 	}
 	
+	
+	
 	public void updateEquationString(String update) {
+		
 		equationString = equationString + update;
+		
 	}
 	
 	
@@ -101,11 +111,15 @@ public class ScientificCalculator extends BasicCalculator{
 					equationListP.add(Double.toString(value));
 				}
 			}
+			
 			return solve(equationListP);
 			
 		} else if (equationList.size() == 1) {
 			String input = equationList.get(0);
 			if (isNumeric(input)){
+				setPreviousAns(input);
+				setPreviousEquation(equationString);
+				writeToHistory();
 				return input;
 			} else {
 				System.out.println(equationList);
@@ -334,6 +348,49 @@ public class ScientificCalculator extends BasicCalculator{
 		equationString = "";
 		}
 		
+	public void writeToHistory() {
+		PrintWriter outputStream = null;
+		try {
+			outputStream = new PrintWriter(new FileOutputStream(filename, true));
+			outputStream.println(getPreviousEquation());
+			outputStream.println(getPreviousAns());
+			outputStream.close();
+			
+		}
+		catch(FileNotFoundException e) {
+			System.out.println("Can't save to session history");
+		}
+	}
+
+	public void closeHistory() {
+		PrintWriter outputStream = null;
+		try {
+			outputStream = new PrintWriter(new FileOutputStream(filename, true));
+			outputStream.println("Session Ended");
+			outputStream.close();
+			
+		}
+		catch(FileNotFoundException e) {
+			System.out.println("Can't save to session history");
+		}
+		
+	}
+
+	public void readHistory() {
+		Scanner inputStream = null;
+		try {
+			inputStream = new Scanner(new File(filename));
+			while (inputStream.hasNext()) {
+				String line = inputStream.nextLine();
+				System.out.println(line);
+				}
+			}
+		catch(FileNotFoundException e) {
+			System.out.println("No history available.");
+			}
+		}
+	
+	
 	/*
 	 * The following methods are arithmetic methods for the scientific calculator.
 	 */
