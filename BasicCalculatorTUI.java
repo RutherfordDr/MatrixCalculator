@@ -15,6 +15,7 @@ public class BasicCalculatorTUI extends BasicCalculator{
 	}
 	
 	public void start() {
+	
 		while (running) {
 			promptForNumber();
 		}
@@ -23,6 +24,7 @@ public class BasicCalculatorTUI extends BasicCalculator{
 		String procede = scanner.next();
 		if (procede.equals("Y")){
 			running = true;
+			BasicCalculator.setPreviousEquation(operation);
 			operation = "";
 			equals = false;
 			start();
@@ -30,7 +32,7 @@ public class BasicCalculatorTUI extends BasicCalculator{
 		
 		else if (procede.equals("N")) {
 			closeHistory();
-			System.out.println("Would you like to view the session history?");
+			System.out.println("Would you like to view the session history? Y/N");
 			if (scanner.next().equals("Y")) {
 				readHistory();
 				running = false;
@@ -73,6 +75,7 @@ public class BasicCalculatorTUI extends BasicCalculator{
 				computeResult();
 				
 				System.out.println("Result is: " + getResult());
+				BasicCalculator.setPreviousAns(Double.toString(getResult()));
 				i = 0;
 				running = false;
 			}
@@ -90,6 +93,8 @@ public class BasicCalculatorTUI extends BasicCalculator{
 		System.out.println("	5. divide /");
 		System.out.println("	6. brackets (");
 		System.out.println("	7. brackets )");
+		System.out.println("	8. previousEquation ");
+		System.out.println("	9. previousAns ");
 	}
 	
 	public void optionInput() {

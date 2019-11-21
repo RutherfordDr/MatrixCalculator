@@ -4,7 +4,7 @@ public class ScientificCalculatorTUI {
 	private ScientificCalculator scientificCalculator;
 	private boolean running;
 	private boolean TUIrunning;
-	private boolean writingEquation;
+	
 	
 	/*public static void main(String[] args) {
 		
@@ -23,7 +23,7 @@ public class ScientificCalculatorTUI {
 		this.scientificCalculator = new ScientificCalculator();
 		running = true;
 		TUIrunning = true;
-		writingEquation = true;
+		
 		
 		start();
 		
@@ -45,10 +45,19 @@ public class ScientificCalculatorTUI {
 		 String procede = scanner.next();
 		 if (procede.equals("N")){
 			TUIrunning = false;
+			scientificCalculator.closeHistory();
+			System.out.println("Would you like to view the session history? Y/N");
+			if (scanner.next().equals("Y")) {
+				scientificCalculator.readHistory();
+				running = false;
+			} else {
+				running = false;
+			}
+		
 		} else if (procede.equals("Y") ) {
 				scientificCalculator.resetEquationString();
 				running = true;
-				writingEquation = true;
+				
 				start();
 		} else {
 				promptToQuit();
@@ -107,7 +116,6 @@ public class ScientificCalculatorTUI {
 		switch (input) {
 			case "=":
 				displaySolve(scientificCalculator.solve(scientificCalculator.parseEquation(scientificCalculator.getEquationString())));
-				writingEquation = false;
 				running = false;
 				break;
 			case "+":
@@ -176,6 +184,14 @@ public class ScientificCalculatorTUI {
 			case "tan":
 				scientificCalculator.updateEquationString(" tan ( ");
 				promptForNumber();
+				displayEquation();
+				break;
+			case "previousEquation":
+				scientificCalculator.updateEquationString(scientificCalculator.getPreviousEquation());
+				displayEquation();
+				break;
+			case "previousAnswer":
+				scientificCalculator.updateEquationString(scientificCalculator.getPreviousAns());
 				displayEquation();
 				break;
 			default:
