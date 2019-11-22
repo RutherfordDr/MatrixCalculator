@@ -5,7 +5,7 @@ public class BasicCalculator {
 	private Scanner scanner;
 	private double ans;
 	
-	
+	//Displays the operations options and prompts the user to input numeric values for the basic equation
 	public BasicCalculator() {
 		
 		if (Main.scientific == false){
@@ -41,6 +41,7 @@ public class BasicCalculator {
 		
 	}
 	
+	//Calls certain methods depending on what the operation input value is corresponding to each operation
 	public void OpType(double epx, int op) {
 		
 		switch (op) {
@@ -60,21 +61,25 @@ public class BasicCalculator {
 		}
 	}
 	
+	//Does addition between the input value and the current value
 	public void Addition(double epx) {
 		ans+=epx;
 		
 	}
 	
+	//Does subtraction between the input value and the current answer value
 	public void Substraction(double epx) {
 		ans-=epx;
 		
 	}
 	
+	//Does multiplication between the input value and the current answer value
 	public void Multiplication(double epx) {
 		ans*=epx;
 		
 	}
 	
+	//Does division between the input value and the current answer value
 	public void Division(double epx) {
 		ans/=epx;
 		
