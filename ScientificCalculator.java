@@ -14,7 +14,7 @@ public class ScientificCalculator extends BasicCalculator{
 	private String equationString;
 	private ArrayList<String> arithmeticOptions;
 	
-	
+	//Operations Display
 	public ScientificCalculator() {
 		radians = true;
 		equationString = "";
@@ -39,32 +39,37 @@ public class ScientificCalculator extends BasicCalculator{
 		
 	}
 	
+	//Returns whether the calculator is in radians or not
 	public boolean getRadians() {
 		return radians;
 	}
 	
+	//Returns the equation as a string
 	public String getEquationString() {
 		return equationString;
 	}
 	
+	//Returns an array list containing all of the arithmetric operations
 	public ArrayList<String> getArithmeticOptions() {
 		return arithmeticOptions;
 	}
 	
+	//Updates the string of eqiations to include the most recent operation and value
 	public void updateEquationString(String update) {
 		equationString = equationString + update;
 	}
 	
+	//Resets the equations to be empty
 	public void resetEquationString() {
 		equationString = "";
 	}
 	
-	
+	//Returns the value of pi
 	public double pi() {
 		return Math.PI;
 	}
 	
-	
+	//Returns a cleaned upmequations that does not contain spaces and null values
 	public ArrayList<String> parseEquation(String equationToSolve) {
 		ArrayList<String> splitEquation = new ArrayList<String>(Arrays.asList(equationToSolve.split("\\s+")));
 		ArrayList<String> cleanedUpEquation = new ArrayList<String>();
@@ -77,12 +82,11 @@ public class ScientificCalculator extends BasicCalculator{
 		
 	}
 	
-	/*
-	 * TODO: The solve method so far only works for +, -, *, /. It is a huge mess and 
-	 * 		 will need to be redone to incorporate all methods for the scientific
-	 * 		 calculator. For demo 1 this will have to suffice.
-	 */
+	//Solves the equation
 	public String solve(ArrayList<String> equationList) {
+		/*Checks if the equation contains only one value or operation then it doews the operations in 
+		* PEMDAS operder from multiplication, to division, to addition, then subtraction
+		*/
 		if (equationList.size() == 1) {
 			String input = equationList.get(0);
 			if (isNumeric(input)){
@@ -180,14 +184,17 @@ public class ScientificCalculator extends BasicCalculator{
 	 * The following methods are arithmetic methods for the scientific calculator.
 	 */
 	
+	//Squaring the input value
 	public double squared(double input) {
 		return input*input;
 	}
 	
+	//Square rooting the input value
 	public double squareRoot(double input) {
 		return Math.sqrt(input);
 	}
 	
+	//Doing the input value to the power of the input exponent
 	public double exponent(double input, double exponent) {
 		if (input == 0) {
 			return 1.0;
@@ -199,14 +206,17 @@ public class ScientificCalculator extends BasicCalculator{
 		}
 	}
 	
+	//Logging the input value
 	public double log(double input) {
 		return Math.log10(input);
 	}
 	
+	//Doing the natural log of the input value
 	public double ln(double input) {
 		return Math.log(input);
 	}
 	
+	//Finding the sin value of the input value in both radians and degrees
 	public double sin(double input) {
 		if (radians) {
 			return Math.sin(input);
@@ -215,6 +225,7 @@ public class ScientificCalculator extends BasicCalculator{
 		}
 	}
 	
+	//Finding the cos value of the input value in both radians and degrees
 	public double cos(double input) {
 		if (radians) {
 			return Math.cos(input);
@@ -223,6 +234,7 @@ public class ScientificCalculator extends BasicCalculator{
 		}
 	}
 	
+	//Finding the tan value of the input value in both radians and degrees
 	public double tan(double input) {
 		if (radians) {
 			return Math.tan(input);
