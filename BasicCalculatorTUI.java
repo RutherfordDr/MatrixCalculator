@@ -15,7 +15,7 @@ public class BasicCalculatorTUI extends BasicCalculator{
 	}
 	
 	public void start() {
-	
+		displayOptions();
 		while (running) {
 			promptForNumber();
 		}
@@ -55,7 +55,7 @@ public class BasicCalculatorTUI extends BasicCalculator{
 		
 			
 			// OPERATION OR NUMBER
-		displayOptions();
+		//displayOptions();
 		System.out.print("Enter an operation or number: ");
 		Scanner scanner = new Scanner(System.in);
 		String numin = scanner.nextLine();
@@ -95,6 +95,7 @@ public class BasicCalculatorTUI extends BasicCalculator{
 		System.out.println("	7. brackets )");
 		System.out.println("	8. previousEquation ");
 		System.out.println("	9. previousAns ");
+		System.out.println("	10. getEquation ");
 	}
 	
 	public void optionInput() {
