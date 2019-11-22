@@ -18,11 +18,17 @@ public class ScientificCalculatorTUI {
 		 *
 		}
 	*/
+	
+	//Starting the TUI
 	public ScientificCalculatorTUI() {
 		this.scientificCalculator = new ScientificCalculator();
 		running = true;
 		writingEquation = true;
 	}
+	
+	/*Displaying the arithmetric operations. This repeats until equals is entered
+	*Then prompts the user whether another operation would like to be done.
+	*/
 	
 	public void start() {
 		displayOptions();
@@ -72,14 +78,17 @@ public class ScientificCalculatorTUI {
 		}
 	}
 	
+	//Displays the equation
 	public void displayEquation() {
 		System.out.println(scientificCalculator.getEquationString());
 	}
 	
+	//Displays teh answer to the equation
 	public void displaySolve(String solution) {
 		System.out.println(solution.toString());
 	}
 	
+	//Prompts the user for a number or an arithmetric operation then updates the equation to contain that number/operation 
 	public void promptForEquation() {
 		System.out.println("Enter the corresponding arithmetic option or number.");
 		Scanner scanner = new Scanner(System.in);
@@ -168,7 +177,8 @@ public class ScientificCalculatorTUI {
 			}
 		}
 	}
-
+	
+	//Prompts the user for a number after sin, cos, tan, log, ln, and ^
 	public void promptForNumber() {
 		System.out.println("Enter a number.");
 		Scanner scanner = new Scanner(System.in);
