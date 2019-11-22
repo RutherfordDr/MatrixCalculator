@@ -28,7 +28,7 @@ public class ScientificCalculator extends BasicCalculator{
 	protected String equationString;
 	private ArrayList<String> arithmeticOptions;
 	private String filename = "scientificCalculatorHistory.txt";
-	
+  
 	public ScientificCalculator() {
 		radians = true;
 		equationString = "";
@@ -54,18 +54,22 @@ public class ScientificCalculator extends BasicCalculator{
 		
 	}
 	
+	//Returns whether the calculator is in radians or not
 	public boolean getRadians() {
 		return radians;
 	}
 	
+	//Returns the equation as a string
 	public String getEquationString() {
 		return equationString;
 	}
 	
+	//Returns an array list containing all of the arithmetric operations
 	public ArrayList<String> getArithmeticOptions() {
 		return arithmeticOptions;
 	}
 	
+	//Updates the string of eqiations to include the most recent operation and value
 	public void updateEquationString(String update) {
 		
 		equationString = equationString + update;
@@ -389,27 +393,32 @@ public class ScientificCalculator extends BasicCalculator{
 	/*
 	 * The following methods are arithmetic methods for the scientific calculator.
 	 */
-	
+  //Returning the value of pi
 	public double pi() {
 		return Math.PI;
 	}
 	
+  //Squaring input value
 	public double squared(double input) {
 		return input*input;
 	}
 	
+	//Square rooting the input value
 	public double squareRoot(double input) {
 		return Math.sqrt(input);
 	}
 	
+	//Doing the input value to the power of the input exponent
 	public double exponent(double input, double exponent) {
 		return Math.pow(input, exponent);
 	}
 	
+	//Logging the input value
 	public double log(double input) {
 		return Math.log10(input);
 	}
 	
+	//Doing the natural log of the input value
 	public double ln(double input) {
 		return Math.log(input);
 	}
@@ -427,6 +436,7 @@ public class ScientificCalculator extends BasicCalculator{
 		}
 	}
 	
+	//Finding the cos value of the input value in both radians and degrees
 	public double cos(double input) {
 		if (radians) {
 			return Math.round(Math.cos(input) * 100.00) / 100.00;
@@ -435,6 +445,7 @@ public class ScientificCalculator extends BasicCalculator{
 		}
 	}
 	
+	//Finding the tan value of the input value in both radians and degrees
 	public double tan(double input) {
 		if (radians) {
 			return Math.round(Math.tan(input) * 100.00) / 100.00;

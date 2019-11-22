@@ -1,10 +1,18 @@
 # MatrixCalculator
-This calculator, similar to others allows users to use a scientific calculator. Although this program also allows users to calculate matrices as well.
+This calculator allows users to choose between three different calculators; a basic calculator, scientific calculator, and matrix calculator.
+
+Important Information:
+The project updated version of the project will be in the section called Demo3, and that version should be the one downloaded. Currently, there are no JUnit tests for this project.
+
+Compiling/Running the code:
+
+To run the program, the user will first need to compile the code. In most cases, the project will be in the Downloads folder. If not, find the location of the program on your computer. Once found, open the file Demo3 and then copy the information found written in the location bar; the default location should be /home/ugd/Username/Downloads/Demo3. Once copied, open Terminal and write 'cd' then paste the location of the Demo3 folder. Next, to compile the code, write the line 'javac computerGUI'. Finally, to run the code type the line 'java computerGUI' this will cause a pop-up menu to appear and start the code.
 
 Operating Instructions:
-- Click the program to start, and a pop-up menu will appear for either a scientific or a matrix calculator. Click whichever calculator is needed to solve the mathematical equation. 
-- If using the scientific calculator, the symbols indicated by the button correspond to those mathematical operations and will operate exactly like a regular scientific calculator. 
-- If the matrix calculator is chosen, then a different screen will appear. Similar to the scientific calculator, the symbols on the button represent mathematical operations that can be used. Although different from the scientific calculator, there will be no number buttons. The user will first need to choose the size of the matrix, which can range from a 1-by-1 to a 4-by-4. Once done, the user can input numbers into the text field but will need to use a space or a comma to indicate the start of a new number. The numbers will be placed from left to right, meaning the first number is row one column one and the second is row one column two and so on. The place button is used to add the numbers input into the matrix. The solve button is used to solve the matrices through the operations indicated. The rewrite button will be used to rewrite the most recent matrix created and will work similarly to the clear button replacing the old matrix entirely with the new one indicated in the text field. 
+- First, follow the steps listed in Compiling/Running the code, if done correctly a new window should open up displaying four options; 'Basic Calculator', 'Scientific Calculator', 'Matrix Calculator', and 'History'.
+- Click whichever calculator fits your current needs or click the history button to display all operations done in this current session.
+- If using the scientific calculator, the symbols indicated by the button correspond to those mathematical operations and will operate exactly like a regular scientific calculator.
+- If the matrix calculator is chosen, then a different screen will appear. Similar to the scientific calculator, the symbols on the button represent mathematical operations that can be used. The button labelled 'T', stands for transpose; 'RREF' stands for reduced-row echelon form; 'S' stands for scalar multiplication. Once done, the user can input numbers into the text field but will need to use a space or a comma to indicate the start of a new number. The numbers will be placed from left to right, meaning the first number is row one column one and the second is row one column two and so on. 
 
 Assumptions made by developers:
 - If numbers in the text field outnumber the number of spaces available in the matrix: The program will not add the additional numbers **The program will _NOT_ create a matrix that is capable of holding all the numbers input**.

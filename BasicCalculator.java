@@ -235,7 +235,6 @@ public class BasicCalculator {
 		catch(FileNotFoundException e) {
 			System.out.println("Can't save to session history");
 		}
-		
 	}
 	/*
 	 * Prints the history into the console.
@@ -267,7 +266,6 @@ public class BasicCalculator {
 			System.out.println("No history available.");
 			}
 		return specificLine;
-		
 		
 	}
 }
