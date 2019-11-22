@@ -5,6 +5,7 @@ Important Information:
 The project updated version of the project will be in the section called Demo3, and that version should be the one downloaded. Currently, there are no JUnit tests for this project.
 
 Compiling/Running the code:
+
 To run the program, the user will first need to compile the code. In most cases, the project will be in the Downloads folder. If not, find the location of the program on your computer. Once found, open the file Demo3 and then copy the information found written in the location bar; the default location should be /home/ugd/Username/Downloads/Demo3. Once copied, open Terminal and write 'cd' then paste the location of the Demo3 folder. Next, to compile the code, write the line 'javac computerGUI'. Finally, to run the code type the line 'java computerGUI' this will cause a pop-up menu to appear and start the code.
 
 Operating Instructions:
