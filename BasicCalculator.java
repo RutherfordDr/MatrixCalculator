@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class BasicCalculator {
 	private ArrayList<String> sessionHistory = new ArrayList<String>();
@@ -34,6 +36,7 @@ public class BasicCalculator {
 		return previousEquation;
 	}
 	
+	
 	public String BasicOperations(String ops) {
 		switch (ops) {
 		case "=":
@@ -54,12 +57,22 @@ public class BasicCalculator {
 			return getPreviousAns();
 		case "previousEquation":
 			return getPreviousEquation();
+		case "getEquation":
+			System.out.println("History:");
+			readHistory();
+			System.out.println("Type the line number you would like. (Starts with line 0)");
+			Scanner scanner = new Scanner(System.in);
+			String lineNumber = scanner.nextLine();
+			return getSpecificLineFromHistory(lineNumber);
 		default:
 			System.out.println("Operation not valid.");
 			return "notvalid";
 		}
 	}
 	
+	/*
+	 * Turns the string equation to solve into an arraylist and removes unnesessary spacing.
+	 */
 	public ArrayList<String> parseEquation(String equationToSolve) {
 		ArrayList<String> splitEquation = new ArrayList<String>(Arrays.asList(equationToSolve.split("\\s+")));
 		ArrayList<String> cleanedUpEquation = new ArrayList<String>();
@@ -71,6 +84,9 @@ public class BasicCalculator {
 		return cleanedUpEquation;
 	}
 	
+	/*
+	 * Takes in the equation to solve in a list form, and solves it recursively following the BEDMAS rules.
+	 */
 	public String solve(ArrayList<String> equationList) {
 		if (equationList.size() == 1) {
 			String input = equationList.get(0);
@@ -185,7 +201,12 @@ public class BasicCalculator {
 	public double getResult() {
 		return result;
 	}
-
+	
+	/*
+	 * Once the equation is solved this method is called which writes the equation and the answer into the 
+	 * history text file on separate lines.
+	 * 
+	 */
 	public void writeToHistory() {
 		PrintWriter outputStream = null;
 		try {
@@ -200,6 +221,9 @@ public class BasicCalculator {
 		}
 	}
 
+	/*
+	 * Closes the history and write "Session Ended" into the history file.
+	 */
 	public void closeHistory() {
 		PrintWriter outputStream = null;
 		try {
@@ -213,7 +237,9 @@ public class BasicCalculator {
 		}
 		
 	}
-
+	/*
+	 * Prints the history into the console.
+	 */
 	public void readHistory() {
 		Scanner inputStream = null;
 		try {
@@ -228,4 +254,20 @@ public class BasicCalculator {
 			}
 		}
 	
+	/*
+	 * TODO: This is proof of concept.
+	 */
+	public String getSpecificLineFromHistory(String lineNumber) {
+		String specificLine = "";
+		try {
+			specificLine = Files.readAllLines(Paths.get(filename)).get(Integer.parseInt(lineNumber));
+			
+		}
+		catch(IOException e) {
+			System.out.println("No history available.");
+			}
+		return specificLine;
+		
+		
+	}
 }

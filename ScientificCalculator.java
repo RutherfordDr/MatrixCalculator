@@ -25,17 +25,13 @@ import java.lang.Math;
 
 public class ScientificCalculator extends BasicCalculator{
 	private boolean radians;
-	private double previousAnswer;
 	protected String equationString;
 	private ArrayList<String> arithmeticOptions;
-	private String previousEquation;
 	private String filename = "scientificCalculatorHistory.txt";
 	
 	public ScientificCalculator() {
 		radians = true;
 		equationString = "";
-		previousEquation = "";
-		previousAnswer = 0.0;
 		arithmeticOptions = new ArrayList<String>();
 		arithmeticOptions.add("equals \"=\"");
 		arithmeticOptions.add("add  \"+\"");
@@ -69,8 +65,6 @@ public class ScientificCalculator extends BasicCalculator{
 	public ArrayList<String> getArithmeticOptions() {
 		return arithmeticOptions;
 	}
-	
-	
 	
 	public void updateEquationString(String update) {
 		
@@ -389,6 +383,7 @@ public class ScientificCalculator extends BasicCalculator{
 			System.out.println("No history available.");
 			}
 		}
+	
 	
 	
 	/*
