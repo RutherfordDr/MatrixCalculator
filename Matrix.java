@@ -1,6 +1,13 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
+
+//This class represents a matrix of floating points numbers. The methods include basic matrix arithmetic and matrix operations.
+//This class contains four constructors.
+//The defualt constructor will ask the user for input via console
+
+
+
 public class Matrix 
 
 {
@@ -164,6 +171,7 @@ public class Matrix
 		}
 	
 	
+	
 	public void getMatrixFromUser()
 	
 		{
@@ -246,7 +254,7 @@ public class Matrix
 		}
 	
 	
-	
+	//Transposes the matrix object provided as an argument and returns the result as a 2D array
 	
 	public double[][] transpose()// CODE FROM https://stackoverflow.com/questions/15449711/transpose-double-matrix-with-a-java-function
 	
@@ -356,7 +364,8 @@ public class Matrix
 	  }
 	 
 	
-	
+	// Multiples "this" matrix object by the matrix object provided as an arugument and returns the result as a 2D array
+	//IF the matrices are not able to be multiplied, then a null object will be returned
 	
 	  public double [][] multiplication(Matrix inMatrix)
 	  
@@ -449,7 +458,7 @@ public class Matrix
 	 * }
 	 */
 	
-	
+	//Reduces the matrix given to the method into RREF and returns a 2D array of the result
 	
 public double [][] reducedRowEcheleon(Matrix inMatrix){
 		int REF = 0;
@@ -497,7 +506,7 @@ public double [][] reducedRowEcheleon(Matrix inMatrix){
 	
 	
 	
-	
+	//resets the 2D Array of this matrix object to a matrix of all zeros
 	
 	public void resetArray()
 	
@@ -511,6 +520,8 @@ public double [][] reducedRowEcheleon(Matrix inMatrix){
 		
 		}
 	
+	
+	//Converts the 2D Array of this matrix object to a string
 	
 	public String toString(){    //FROM https://www.dreamincode.net/forums/topic/379950-making-a-tostring-method-for-2d-integer-array/
 		
