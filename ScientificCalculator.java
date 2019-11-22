@@ -69,7 +69,7 @@ public class ScientificCalculator extends BasicCalculator{
 		return Math.PI;
 	}
 	
-	//Returns a cleaned upmequations that does not contain spaces and null values
+	//Returns a cleaned up version of the equation that does not contain spaces and null values
 	public ArrayList<String> parseEquation(String equationToSolve) {
 		ArrayList<String> splitEquation = new ArrayList<String>(Arrays.asList(equationToSolve.split("\\s+")));
 		ArrayList<String> cleanedUpEquation = new ArrayList<String>();
