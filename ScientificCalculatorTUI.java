@@ -3,7 +3,8 @@ import java.util.Scanner;
 public class ScientificCalculatorTUI {
 	private ScientificCalculator scientificCalculator;
 	private boolean running;
-	private boolean writingEquation;
+	private boolean TUIrunning;
+	
 	
 	/*public static void main(String[] args) {
 		
@@ -23,7 +24,11 @@ public class ScientificCalculatorTUI {
 	public ScientificCalculatorTUI() {
 		this.scientificCalculator = new ScientificCalculator();
 		running = true;
-		writingEquation = true;
+		TUIrunning = true;
+		
+		
+		start();
+		
 	}
 	
 	/*Displaying the arithmetric operations. This repeats until equals is entered
@@ -31,22 +36,39 @@ public class ScientificCalculatorTUI {
 	*/
 	
 	public void start() {
-		displayOptions();
-		while (running) {
-			promptForEquation();
-		}
-		System.out.println("Would you like to enter another equation Y/N");
-		Scanner scanner = new Scanner(System.in);
-		String procede = scanner.next();
-		if (procede.equals("Y")){
-			scientificCalculator.resetEquationString();
-			running = true;
-			writingEquation = true;
-			start();
-		} 
-		
+		while (TUIrunning) {
+			displayOptions();
+			while (running) {
+				promptForEquation();
+			}
+			promptToQuit();}
+
 	}
 	
+	public void promptToQuit() {
+		 System.out.println("Would you like to enter another equation Y/N");
+		 Scanner scanner = new Scanner(System.in);
+		 String procede = scanner.next();
+		 if (procede.equals("N")){
+			TUIrunning = false;
+			scientificCalculator.closeHistory();
+			System.out.println("Would you like to view the session history? Y/N");
+			if (scanner.next().equals("Y")) {
+				scientificCalculator.readHistory();
+				running = false;
+			} else {
+				running = false;
+			}
+		
+		} else if (procede.equals("Y") ) {
+				scientificCalculator.resetEquationString();
+				running = true;
+				
+				start();
+		} else {
+				promptToQuit();
+			}
+	 }
 	/*
 	 * Displays the arithmetic options in a list.
 	 * 	Ex:
@@ -93,18 +115,16 @@ public class ScientificCalculatorTUI {
 		System.out.println("Enter the corresponding arithmetic option or number.");
 		Scanner scanner = new Scanner(System.in);
 		
+		
 		if (scanner.hasNextDouble()) {
 			String input = scanner.next();
-			
 			scientificCalculator.updateEquationString(input);
 			displayEquation();
 		} else {
-		
 		String input = scanner.next();	
 		switch (input) {
 			case "=":
 				displaySolve(scientificCalculator.solve(scientificCalculator.parseEquation(scientificCalculator.getEquationString())));
-				writingEquation = false;
 				running = false;
 				break;
 			case "+":
@@ -124,21 +144,26 @@ public class ScientificCalculatorTUI {
 				displayEquation();
 				break;
 			case "log":
-				scientificCalculator.updateEquationString(" log(");
+				scientificCalculator.updateEquationString("log (");
 				promptForNumber();
 				displayEquation();
 				break;
 			case "ln":
-				scientificCalculator.updateEquationString(" ln(");
+				scientificCalculator.updateEquationString("ln (");
 				promptForNumber();
 				displayEquation();
 				break;
 			case "^2":
-				scientificCalculator.updateEquationString(" ^(2) ");
+				scientificCalculator.updateEquationString(" ^ ( 2 ) ");
+				displayEquation();
+				break;
+			case "sqrt":
+				scientificCalculator.updateEquationString("sqrt ( ");
+				promptForNumber();
 				displayEquation();
 				break;
 			case "^":
-				scientificCalculator.updateEquationString(" ^(");
+				scientificCalculator.updateEquationString(" ^ ( ");
 				promptForNumber();
 				displayEquation();
 				break;
@@ -156,18 +181,26 @@ public class ScientificCalculatorTUI {
 				displayEquation();
 				break;
 			case "sin":
-				scientificCalculator.updateEquationString(" sin(");
+				scientificCalculator.updateEquationString(" sin ( ");
 				promptForNumber();
 				displayEquation();
 				break;
 			case "cos":
-				scientificCalculator.updateEquationString(" cos(");
+				scientificCalculator.updateEquationString(" cos ( ");
 				promptForNumber();
 				displayEquation();
 				break;
 			case "tan":
-				scientificCalculator.updateEquationString(" tan(");
+				scientificCalculator.updateEquationString(" tan ( ");
 				promptForNumber();
+				displayEquation();
+				break;
+			case "previousEquation":
+				scientificCalculator.updateEquationString(scientificCalculator.getPreviousEquation());
+				displayEquation();
+				break;
+			case "previousAnswer":
+				scientificCalculator.updateEquationString(scientificCalculator.getPreviousAns());
 				displayEquation();
 				break;
 			default:
@@ -195,8 +228,6 @@ public class ScientificCalculatorTUI {
 		}
 		
 	}
-	
-	
-	
+
 	
 }

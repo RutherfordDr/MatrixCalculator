@@ -22,8 +22,7 @@ public class CalculatorGUI extends Application{
 	Scene scene3;
 	Scene scene4;
 	Stage window;
-	
-	//Opens the first window to display the calculator options
+
 	public static void main(String[] args)
 	   {
 	      launch(args);
@@ -173,6 +172,7 @@ public class CalculatorGUI extends Application{
 	      BorderPane root3= new BorderPane();
 	      scene3 = new Scene(root3, 400, 400);
 	      
+
         //--SCENE 4-- (Matrix Calculator)
           MatrixGUI m = new MatrixGUI();
 	      BorderPane root4= new BorderPane();
@@ -288,6 +288,7 @@ public class CalculatorGUI extends Application{
 
 	  
 	   //Checks if the input value is a number or not and returns a boolean response to this
+  
 	   public static boolean isNumeric(String str) { 
 		   try {  
 		     Double.parseDouble(str);  
