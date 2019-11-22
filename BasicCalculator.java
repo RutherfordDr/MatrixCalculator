@@ -4,6 +4,12 @@ public class BasicCalculator {
 
 	private Scanner scanner;
 	private double ans;
+	private ArrayList<String> sessionHistory = new ArrayList<String>();
+	private String operation = "";
+	private double result;
+	private String previousAns= "0";
+	private String previousEquation = "";
+	private String filename = "basicCalculatorHistory.txt";
 	
 	//Displays the operations options and prompts the user to input numeric values for the basic equation
 	public BasicCalculator() {
