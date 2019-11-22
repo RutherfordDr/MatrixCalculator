@@ -24,7 +24,7 @@ import java.lang.Math;
  */
 
 public class ScientificCalculator extends BasicCalculator{
-	private boolean radians;
+	protected boolean radians;
 	protected String equationString;
 	private ArrayList<String> arithmeticOptions;
 	private String filename = "scientificCalculatorHistory.txt";
