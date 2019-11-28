@@ -15,9 +15,15 @@ public class BasicCalculator {
 	
 	public BasicCalculator() {
 		
-		
 	}
 	
+	public String getFilename() {
+		return filename;
+	}
+	
+	public void setOperation(String equation) {
+		operation = equation;
+	}
 	public void setPreviousAns(String ans) {
 		if (isNumeric(ans)) {
 			previousAns = ans;
@@ -60,10 +66,16 @@ public class BasicCalculator {
 		case "getEquation":
 			System.out.println("History:");
 			readHistory();
-			System.out.println("Type the line number you would like. (Starts with line 0)");
+			System.out.println("Type the line number you would like. (Starts with line 0, Session Ended lines don't count.)");
 			Scanner scanner = new Scanner(System.in);
-			String lineNumber = scanner.nextLine();
-			return getSpecificLineFromHistory(lineNumber);
+			while (!scanner.hasNextInt()) {
+			      System.out.println("Input is not a number.");
+			      scanner.nextLine();
+			    }
+			String lineNumber = Integer.toString(scanner.nextInt());
+			return getSpecificLineFromHistory(lineNumber, getFilename());
+		case "backspace":
+		    return "backspace";
 		default:
 			System.out.println("Operation not valid.");
 			return "notvalid";
@@ -98,6 +110,38 @@ public class BasicCalculator {
 				System.out.println(equationList);
 				return "Not valid equation.";
 			}
+		}else if (equationList.contains("(")) {
+			
+			ArrayList<String> equationListP = new ArrayList<String>();
+			int iBeginning = equationList.lastIndexOf("(");
+			int iEnd = -1;
+			ArrayList<String> temporary = new ArrayList<String>();
+			for (int i = iBeginning + 1; i < equationList.size(); i++) {
+				temporary.add(equationList.get(i));
+				
+			}
+			
+			if (!temporary.contains(")")) {
+				return "Not valid equation.";
+			} else {
+				iEnd = temporary.indexOf(")") + iBeginning + 1;
+				ArrayList<String> parenthesisList = new ArrayList<String>();
+				for (int i = iBeginning + 1; i < iEnd; i++) {
+					parenthesisList.add(equationList.get(i));
+					
+				}
+				double value = Double.parseDouble(solve(parenthesisList));
+				for (int i=0; i < equationList.size(); i++) {
+					if (iBeginning > i || i > iEnd) {
+						equationListP.add(equationList.get(i));
+						
+					} else if (i==iBeginning) {
+						equationListP.add(Double.toString(value));
+					}
+				}
+				return solve(equationListP);
+			}
+			
 		} else if (equationList.contains("*")) {
 			ArrayList<String> equationListP = new ArrayList<String>();
 			int iplus = equationList.indexOf("*");
@@ -254,18 +298,39 @@ public class BasicCalculator {
 		}
 	
 	/*
-	 * TODO: This is proof of concept.
+	 * 
 	 */
-	public String getSpecificLineFromHistory(String lineNumber) {
+	public String getSpecificLineFromHistory(String lineNumber, String filename) {
 		String specificLine = "";
+		
 		try {
 			specificLine = Files.readAllLines(Paths.get(filename)).get(Integer.parseInt(lineNumber));
-			
+			if (specificLine.equals("Session Ended")) {
+				specificLine = Files.readAllLines(Paths.get(filename)).get(Integer.parseInt(lineNumber + 1));
+			}
+			return specificLine;
 		}
 		catch(IOException e) {
 			System.out.println("No history available.");
-			}
-		return specificLine;
+		}
+		catch (IndexOutOfBoundsException e) {
+			System.out.println("Not a valid input.");
+		}
 		
+		return specificLine;
+		}
+		
+	public void deleteHistory() {
+			
+			try {	
+				PrintWriter outputStream = new PrintWriter(new FileOutputStream(getFilename()));
+				outputStream.println("");
+				outputStream.close();
+				}
+			catch(FileNotFoundException e) {
+				System.out.println("No history available.");
+				}
 	}
+		
+	
 }

@@ -22,6 +22,10 @@ public class BasicCalculatorTUI extends BasicCalculator{
 		System.out.println("Would you like to do another operation Y/N");
 		Scanner scanner = new Scanner(System.in);
 		String procede = scanner.next();
+		while (!procede.equals("Y") && !procede.equals("N")) {
+			System.out.println("Would you like to do another operation Y/N");
+			procede = scanner.next();
+		}
 		if (procede.equals("Y")){
 			running = true;
 			BasicCalculator.setPreviousEquation(operation);
@@ -30,22 +34,25 @@ public class BasicCalculatorTUI extends BasicCalculator{
 			start();
 		} 
 		
-		else if (procede.equals("N")) {
+		else  {
 			closeHistory();
+			operation = "";
+			equals = false;
 			System.out.println("Would you like to view the session history? Y/N");
-			if (scanner.next().equals("Y")) {
+			String viewHistory = scanner.next();
+			while (!viewHistory.equals("Y") && !viewHistory.equals("N")){
+				System.out.println("Would you like to view the session history? Y/N");
+				viewHistory = scanner.next();
+			}
+			if (viewHistory.equals("Y")) {
 				readHistory();
 				running = false;
 			} else {
 				running = false;
-			}
+			}	
 		
 		}
-		else {
-			System.out.println("Invalid input. Program terminated.");
-			closeHistory();
-			running=false;
-		}
+		
 	}
 		
 	public void promptForNumber() {	
@@ -72,12 +79,18 @@ public class BasicCalculatorTUI extends BasicCalculator{
 		}
 		
 			if (equals == true) {
+				try {
 				computeResult();
-				
 				System.out.println("Result is: " + getResult());
 				BasicCalculator.setPreviousAns(Double.toString(getResult()));
 				i = 0;
 				running = false;
+				} catch (Exception e) {
+				System.out.println("Invalid equation.");
+				i = 0;
+				running = false;
+				}
+				
 			}
 		System.out.println("\033[H\033[2J");
 		System.out.println(operation);
@@ -96,18 +109,24 @@ public class BasicCalculatorTUI extends BasicCalculator{
 		System.out.println("	8. previousEquation ");
 		System.out.println("	9. previousAns ");
 		System.out.println("	10. getEquation ");
+		System.out.println("	10. backspace ");
 	}
 	
 	public void optionInput() {
 		String ops = BasicCalculator.BasicOperations(op);
 		if (ops == "notvalid") {
-			System.out.print("Last input errased. Enter a valid operation. ");
-			optionInput();
+			System.out.println("Last input erased. Enter a valid operation. ");
+			op ="";
+			displayOptions();
+			promptForNumber();
 		}
 		else if (ops == " = "){
 			equals = true;
-		}
-		else {
+		}else if (ops.equals("backspace")) {
+			if (operation.length() > 1) {
+		        operation = operation.substring(0, operation.length() - 1);
+			}
+		}else {
 			operation += ops;
 		}
 		
