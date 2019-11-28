@@ -14,6 +14,7 @@ public class BasicCalculator {
 	private String filename = "basicCalculatorHistory.txt";
 	
 	public BasicCalculator() {
+		
 	}
 	
 	public String getFilename() {
@@ -23,7 +24,6 @@ public class BasicCalculator {
 	public void setOperation(String equation) {
 		operation = equation;
 	}
-
 	public void setPreviousAns(String ans) {
 		if (isNumeric(ans)) {
 			previousAns = ans;
@@ -76,7 +76,7 @@ public class BasicCalculator {
 			return getSpecificLineFromHistory(lineNumber, getFilename());
 		case "backspace":
 		    return "backspace";
-  	default:
+		default:
 			System.out.println("Operation not valid.");
 			return "notvalid";
 		}
@@ -110,7 +110,6 @@ public class BasicCalculator {
 				System.out.println(equationList);
 				return "Not valid equation.";
 			}
-
 		}else if (equationList.contains("(")) {
 			
 			ArrayList<String> equationListP = new ArrayList<String>();
@@ -142,6 +141,7 @@ public class BasicCalculator {
 				}
 				return solve(equationListP);
 			}
+			
 		} else if (equationList.contains("*")) {
 			ArrayList<String> equationListP = new ArrayList<String>();
 			int iplus = equationList.indexOf("*");
@@ -332,4 +332,5 @@ public class BasicCalculator {
 				}
 	}
 		
+	
 }
