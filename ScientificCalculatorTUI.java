@@ -19,6 +19,8 @@ public class ScientificCalculatorTUI {
 		 *
 		}
 	*/
+	
+	//Starting the TUI
 	public ScientificCalculatorTUI() {
 		this.scientificCalculator = new ScientificCalculator();
 		running = true;
@@ -28,6 +30,10 @@ public class ScientificCalculatorTUI {
 		start();
 		
 	}
+	
+	/*Displaying the arithmetric operations. This repeats until equals is entered
+	*Then prompts the user whether another operation would like to be done.
+	*/
 	
 	public void start() {
 		while (TUIrunning) {
@@ -47,7 +53,12 @@ public class ScientificCalculatorTUI {
 			TUIrunning = false;
 			scientificCalculator.closeHistory();
 			System.out.println("Would you like to view the session history? Y/N");
-			if (scanner.next().equals("Y")) {
+			String viewHistory = scanner.next();
+			while (!viewHistory.equals("Y") && !viewHistory.equals("N")){
+				System.out.println("Would you like to view the session history? Y/N");
+				viewHistory = scanner.next();
+			}
+			if (viewHistory.equals("Y")) {
 				scientificCalculator.readHistory();
 				running = false;
 			} else {
@@ -94,14 +105,17 @@ public class ScientificCalculatorTUI {
 		}
 	}
 	
+	//Displays the equation
 	public void displayEquation() {
 		System.out.println(scientificCalculator.getEquationString());
 	}
 	
+	//Displays teh answer to the equation
 	public void displaySolve(String solution) {
 		System.out.println(solution.toString());
 	}
 	
+	//Prompts the user for a number or an arithmetric operation then updates the equation to contain that number/operation 
 	public void promptForEquation() {
 		System.out.println("Enter the corresponding arithmetic option or number.");
 		Scanner scanner = new Scanner(System.in);
@@ -115,7 +129,12 @@ public class ScientificCalculatorTUI {
 		String input = scanner.next();	
 		switch (input) {
 			case "=":
+				try {
 				displaySolve(scientificCalculator.solve(scientificCalculator.parseEquation(scientificCalculator.getEquationString())));
+				} catch (Exception e) {
+					System.out.println("Invalid equation.");
+					
+				}
 				running = false;
 				break;
 			case "+":
@@ -194,6 +213,28 @@ public class ScientificCalculatorTUI {
 				scientificCalculator.updateEquationString(scientificCalculator.getPreviousAns());
 				displayEquation();
 				break;
+			case "getEquation":
+				System.out.println("History:");
+				scientificCalculator.readHistory();
+				System.out.println("Type the line number you would like. (Starts with line 0, Session Ended lines don't count.)");
+				Scanner scanner1 = new Scanner(System.in);
+				while (!scanner1.hasNextInt()) {
+				      System.out.println("Input is not a number.");
+				      scanner1.nextLine();
+				    }
+				String lineNumber = Integer.toString(scanner1.nextInt());
+				System.out.println(scientificCalculator.getSpecificLineFromHistory(lineNumber, scientificCalculator.getFilename()));
+				scientificCalculator.updateEquationString(scientificCalculator.getSpecificLineFromHistory(lineNumber, scientificCalculator.getFilename()));
+				break;
+			case "backspace":
+				 String equation =scientificCalculator.getEquationString();
+				if (equation.length() > 1) {
+					equation = equation.substring(0, equation.length() - 1);
+				}
+				scientificCalculator.setEquationString(equation);
+				displayEquation();
+				break;
+				
 			default:
 				System.out.println("Not an option.");
 				displayOptions();
@@ -201,7 +242,8 @@ public class ScientificCalculatorTUI {
 			}
 		}
 	}
-
+	
+	//Prompts the user for a number after sin, cos, tan, log, ln, and ^
 	public void promptForNumber() {
 		System.out.println("Enter a number.");
 		Scanner scanner = new Scanner(System.in);

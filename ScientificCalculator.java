@@ -24,11 +24,11 @@ import java.lang.Math;
  */
 
 public class ScientificCalculator extends BasicCalculator{
-	private boolean radians;
+	protected boolean radians;
 	protected String equationString;
 	private ArrayList<String> arithmeticOptions;
 	private String filename = "scientificCalculatorHistory.txt";
-	
+  
 	public ScientificCalculator() {
 		radians = true;
 		equationString = "";
@@ -51,21 +51,31 @@ public class ScientificCalculator extends BasicCalculator{
 		arithmeticOptions.add(") \")\" ");
 		arithmeticOptions.add("previousEquation");
 		arithmeticOptions.add("previousAnswer");
+		arithmeticOptions.add("getEquation");
+		arithmeticOptions.add("backspace");
 		
 	}
 	
+	//Returns whether the calculator is in radians or not
 	public boolean getRadians() {
 		return radians;
 	}
-	
+	public String getFilename() {
+		return filename;
+	}
+	//Returns the equation as a string
 	public String getEquationString() {
 		return equationString;
 	}
 	
+	//Returns an array list containing all of the arithmetric operations
 	public ArrayList<String> getArithmeticOptions() {
 		return arithmeticOptions;
 	}
-	
+	public void setEquationString(String equation) {
+		equationString = equation;
+	}
+	//Updates the string of equations to include the most recent operation and value
 	public void updateEquationString(String update) {
 		
 		equationString = equationString + update;
@@ -345,7 +355,7 @@ public class ScientificCalculator extends BasicCalculator{
 	public void writeToHistory() {
 		PrintWriter outputStream = null;
 		try {
-			outputStream = new PrintWriter(new FileOutputStream(filename, true));
+			outputStream = new PrintWriter(new FileOutputStream(getFilename(), true));
 			outputStream.println(getPreviousEquation());
 			outputStream.println(getPreviousAns());
 			outputStream.close();
@@ -359,7 +369,7 @@ public class ScientificCalculator extends BasicCalculator{
 	public void closeHistory() {
 		PrintWriter outputStream = null;
 		try {
-			outputStream = new PrintWriter(new FileOutputStream(filename, true));
+			outputStream = new PrintWriter(new FileOutputStream(getFilename(), true));
 			outputStream.println("Session Ended");
 			outputStream.close();
 			
@@ -373,7 +383,7 @@ public class ScientificCalculator extends BasicCalculator{
 	public void readHistory() {
 		Scanner inputStream = null;
 		try {
-			inputStream = new Scanner(new File(filename));
+			inputStream = new Scanner(new File(getFilename()));
 			while (inputStream.hasNext()) {
 				String line = inputStream.nextLine();
 				System.out.println(line);
@@ -386,30 +396,38 @@ public class ScientificCalculator extends BasicCalculator{
 	
 	
 	
+	
+	
+	
 	/*
 	 * The following methods are arithmetic methods for the scientific calculator.
 	 */
-	
+  //Returning the value of pi
 	public double pi() {
 		return Math.PI;
 	}
 	
+  //Squaring input value
 	public double squared(double input) {
 		return input*input;
 	}
 	
+	//Square rooting the input value
 	public double squareRoot(double input) {
 		return Math.sqrt(input);
 	}
 	
+	//Doing the input value to the power of the input exponent
 	public double exponent(double input, double exponent) {
 		return Math.pow(input, exponent);
 	}
 	
+	//Logging the input value
 	public double log(double input) {
 		return Math.log10(input);
 	}
 	
+	//Doing the natural log of the input value
 	public double ln(double input) {
 		return Math.log(input);
 	}
@@ -427,6 +445,7 @@ public class ScientificCalculator extends BasicCalculator{
 		}
 	}
 	
+	//Finding the cos value of the input value in both radians and degrees
 	public double cos(double input) {
 		if (radians) {
 			return Math.round(Math.cos(input) * 100.00) / 100.00;
@@ -435,6 +454,7 @@ public class ScientificCalculator extends BasicCalculator{
 		}
 	}
 	
+	//Finding the tan value of the input value in both radians and degrees
 	public double tan(double input) {
 		if (radians) {
 			return Math.round(Math.tan(input) * 100.00) / 100.00;
