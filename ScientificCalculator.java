@@ -53,6 +53,7 @@ public class ScientificCalculator extends BasicCalculator{
 		arithmeticOptions.add("previousAnswer");
 		arithmeticOptions.add("getEquation");
 		arithmeticOptions.add("backspace");
+
 		
 	}
 	
@@ -60,9 +61,11 @@ public class ScientificCalculator extends BasicCalculator{
 	public boolean getRadians() {
 		return radians;
 	}
+
 	public String getFilename() {
 		return filename;
 	}
+
 	//Returns the equation as a string
 	public String getEquationString() {
 		return equationString;
@@ -72,10 +75,13 @@ public class ScientificCalculator extends BasicCalculator{
 	public ArrayList<String> getArithmeticOptions() {
 		return arithmeticOptions;
 	}
+
 	public void setEquationString(String equation) {
 		equationString = equation;
 	}
-	//Updates the string of equations to include the most recent operation and value
+
+	
+	//Updates the string of eqiations to include the most recent operation and value
 	public void updateEquationString(String update) {
 		
 		equationString = equationString + update;
@@ -355,6 +361,7 @@ public class ScientificCalculator extends BasicCalculator{
 	public void writeToHistory() {
 		PrintWriter outputStream = null;
 		try {
+
 			outputStream = new PrintWriter(new FileOutputStream(getFilename(), true));
 			outputStream.println(getPreviousEquation());
 			outputStream.println(getPreviousAns());
@@ -369,6 +376,7 @@ public class ScientificCalculator extends BasicCalculator{
 	public void closeHistory() {
 		PrintWriter outputStream = null;
 		try {
+
 			outputStream = new PrintWriter(new FileOutputStream(getFilename(), true));
 			outputStream.println("Session Ended");
 			outputStream.close();
@@ -383,8 +391,9 @@ public class ScientificCalculator extends BasicCalculator{
 	public void readHistory() {
 		Scanner inputStream = null;
 		try {
+
 			inputStream = new Scanner(new File(getFilename()));
-			while (inputStream.hasNext()) {
+      while (inputStream.hasNext()) {
 				String line = inputStream.nextLine();
 				System.out.println(line);
 				}
@@ -393,10 +402,6 @@ public class ScientificCalculator extends BasicCalculator{
 			System.out.println("No history available.");
 			}
 		}
-	
-	
-	
-	
 	
 	
 	/*
