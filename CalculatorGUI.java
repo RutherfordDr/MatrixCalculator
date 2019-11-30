@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
@@ -22,6 +23,7 @@ public class CalculatorGUI extends Application{
 	Scene scene2;
 	Scene scene3;
 	Scene scene4;
+	Scene scene5;
 	Stage window;
 	 
 	public static void main(String[] args)
@@ -287,7 +289,7 @@ public class CalculatorGUI extends Application{
 	        bt29.setText("   log   ");
 	        bt29.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override public void handle(ActionEvent e) {
-	            	sc.Operation("log (");
+	            	sc.Operation("log ( ");
 	            	textSOP.setText(sc.getOperation());
 	            }
 	        });
@@ -384,74 +386,148 @@ public class CalculatorGUI extends Application{
 	            	textmode.setText(sc.displayMode());
 	            }
 	        });
+	        Button bt39 = new Button();
+	        bt39.setText("  Backspace  ");
+	        bt39.setOnAction(new EventHandler<ActionEvent>() {
+	            @Override public void handle(ActionEvent e) {
+	               if (sc.operation.length()>0) {
+	            	   		sc.operation = sc.operation.substring(0, sc.operation.length() - 1);
+	            		   }
+	               textSOP.setText(sc.getOperation());
+	            }
+	        });
+	        
 	        buttonsMODE.getChildren().add(bt38);
+	        buttonsMODE.getChildren().add(bt39);
 	      
-	   //--SCENE 4-- (Matrix Calculator)
-	         // MatrixGUI m = new MatrixGUI();
+	        //--SCENE 4-- (Matrix Calculator)
+	          MatrixGUI m = new MatrixGUI();
 		      BorderPane root4= new BorderPane();
-	          scene4 = new Scene(root4, 600, 400);
-	        /*  HBox buttonsM = new HBox();
-	          root4.setTop(buttonsM);
+	          scene4 = new Scene(root4, 700, 600);
+	          HBox buttonsM = new HBox();
+	          root4.setBottom(buttonsM);
 	          root4.setPadding(new Insets(70, 25, 30, 30));
 	          Text textM = new Text();
 	          root4.setCenter(textM);
-	          textM.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+			  textM.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+			  Text textM1 = new Text();
+			  root4.setLeft(textM1);
+			textM1.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+			Text textM2 = new Text();
+			  root4.setRight(textM2);
+			textM2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
 
 	          	// Creating Buttons for GUI
 	          	Button btM1 = new Button();
 			        btM1.setText("   +   ");
 			        btM1.setOnAction(new EventHandler<ActionEvent>() {
 			            @Override public void handle(ActionEvent e) {
-			            	m.operation("+");
-			            	textM.setText(" + ");
+							m.setMatrix(textM1.getText());
+							m.setMatrix2(textM2.getText());
+							textM.setText(" + ");
+							if (m.operation("+") == null){
+								BorderPane root5 = new BorderPane();
+								scene5 = new Scene(root5, 400, 400);
+								Text textE = new Text();
+			  					root5.setCenter(textE);
+								textE.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+								textE.setText("Invalid Operation");
+							} else {
+								textM1.setText(m.operation("+"));
+								textM2.setText("");
+							}
 			            }
 					});
 				Button btM2 = new Button();
 			        btM2.setText("   -   ");
 			        btM2.setOnAction(new EventHandler<ActionEvent>() {
 			            @Override public void handle(ActionEvent e) {
-			            	m.operation("-");
-			            	textM.setText(" - ");
+			            	m.setMatrix(textM1.getText());
+							m.setMatrix2(textM2.getText());
+							textM.setText(" - ");
+							if (m.operation("-") == null){
+								BorderPane root5 = new BorderPane();
+								scene5 = new Scene(root5, 400, 400);
+								Text textE = new Text();
+			  					root5.setCenter(textE);
+								textE.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+								textE.setText("Invalid Operation");
+							} else {
+								textM1.setText(m.operation("-"));
+								textM2.setText("");
+							}
 			            }
 					});
 				Button btM3 = new Button();
 			        btM3.setText("   *   ");
 			        btM3.setOnAction(new EventHandler<ActionEvent>() {
 			            @Override public void handle(ActionEvent e) {
-			            	m.operation("*");
-			            	textM.setText(" * ");
+			            	m.setMatrix(textM1.getText());
+							m.setMatrix2(textM2.getText());
+							textM.setText(" * ");
+							if (m.operation("*") == null){
+								BorderPane root5 = new BorderPane();
+								scene5 = new Scene(root5, 400, 400);
+								Text textE = new Text();
+			  					root5.setCenter(textE);
+								textE.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+								textE.setText("Invalid Operation");
+							} else {
+								textM1.setText(m.operation("*"));
+								textM2.setText("");
+							}
 			            }
 					});
 				Button btM4 = new Button();
 			        btM4.setText("   T   ");
 			        btM4.setOnAction(new EventHandler<ActionEvent>() {
 			            @Override public void handle(ActionEvent e) {
-			            	m.operation("T");
-			            	textM.setText(" T ");
+			            	m.setMatrix(textM1.getText());
+							textM.setText(" T ");
+							textM2.setText(m.operation("T"));
 			            }
 					});
 				Button btM5 = new Button();
 			        btM5.setText("   RREF   ");
 			        btM5.setOnAction(new EventHandler<ActionEvent>() {
 			            @Override public void handle(ActionEvent e) {
-			            	m.operation("RREF");
-			            	textM.setText(" RREF ");
+			            	m.setMatrix(textM1.getText());
+							textM.setText(" RREF ");
+							textM2.setText(m.operation("RREF"));
 			            }
 					});
 				Button btM6 = new Button();
 			        btM6.setText("   Scalar Multiplication   ");
 			        btM6.setOnAction(new EventHandler<ActionEvent>() {
 			            @Override public void handle(ActionEvent e) {
-			            	m.operation("S");
-			            	textM.setText(" S ");
+			            	m.setMatrix(textM1.getText());
+							m.setScalar(textM2.getText());
+							textM.setText(" S ");
+							textM1.setText(m.operation("S"));
+							textM2.setText("");
 			            }
 					});
-				Button btM7 = new Button();
-			        btM7.setText("   =   ");
+					Button btM7 = new Button();
+			        btM7.setText("  Clr Matrix 1  ");
 			        btM7.setOnAction(new EventHandler<ActionEvent>() {
 			            @Override public void handle(ActionEvent e) {
-			            	m.operation("=");
-			            	textM.setText(" = ");
+							textM1.setText("");
+			            }
+					});
+					Button btM8 = new Button();
+			        btM8.setText("  Clr Matrix 2  ");
+			        btM8.setOnAction(new EventHandler<ActionEvent>() {
+			            @Override public void handle(ActionEvent e) {
+							textM2.setText("");
+			            }
+					});
+					Button btM9 = new Button();
+			        btM9.setText("  Clr All  ");
+			        btM9.setOnAction(new EventHandler<ActionEvent>() {
+			            @Override public void handle(ActionEvent e) {
+							textM2.setText("");
+							textM1.setText("");
+							textM.setText("");
 			            }
 					});
 				//Adding Buttons to GUI
@@ -462,42 +538,55 @@ public class CalculatorGUI extends Application{
 				buttonsM.getChildren().add(btM5);
 				buttonsM.getChildren().add(btM6);
 				buttonsM.getChildren().add(btM7);
+				buttonsM.getChildren().add(btM8);
+				buttonsM.getChildren().add(btM9);
 				
 				//Inserting Matrix Values
-				Text textM1 = new Text();
-	          	root4.setLeft(textM1);
-				textM1.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
-				Text textM2 = new Text();
-	          	root4.setRight(textM2);
-				textM2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
-				HBox textM3 = new HBox();
-				   TextField textMatrix = new TextField("Insert ALL numbers for matrix");
-				   TextField textRows = new TextField("Insert number of coloums in matrix");
-				   TextField textColoums = new TextField("Insert number of rows in matrix");
-			    root4.setTop(textM3);
+				HBox textM11 = new HBox();
+					GridPane gridM = new GridPane();
+			        gridM.setVgap(3);
+			        gridM.setAlignment(Pos.CENTER);
+			        root4.setTop(gridM);
+				   TextField textMatrix = new TextField("Insert ALL numbers for matrix 1 (Comma + Space Separated) and press ENTER");
+				   TextField textMatrix2 = new TextField("Insert ALL numbers for matrix 2 (Comma + Space Separated) and press ENTER");
+				   TextField textRows = new TextField("Insert number of columns in matrix and press ENTER");
+				   TextField textColoums = new TextField("Insert number of rows in matrix and press ENTER");
+				   gridM.add(textRows, 0, 0);
+				   gridM.add(textColoums, 0, 1);
+				   gridM.add(textMatrix, 0, 2);
+				   gridM.add(textMatrix2, 0, 3);
+				   ColumnConstraints col1 = new ColumnConstraints();
+			       col1.setPercentWidth(100);
+			       gridM.getColumnConstraints().addAll(col1);
 			        textMatrix.setOnAction(new EventHandler<ActionEvent>() {
 			            @Override public void handle(ActionEvent e) {
 			            	String temp = textMatrix.getText();
-							if(textM1.getText() == null){
 								textM1.setText(m.createMatrix(temp));
-							} else {
-								textM2.setText(m.createMatrix(temp));
-							}
-			            }
+								}
+					}); 
+			        textMatrix2.setOnAction(new EventHandler<ActionEvent>() {
+			            @Override public void handle(ActionEvent e) {
+			            	String temp1 = textMatrix2.getText();
+								textM2.setText(m.createMatrix(temp1));
+								}
 					}); 
 					textRows.setOnAction(new EventHandler<ActionEvent>() {
 			            @Override public void handle(ActionEvent e) {
 			            	String temp = textRows.getText();
 							m.matrixRows(temp);
+							String temp1 = textRows.getText();
+							m.matrixRows(temp1);
 			            }
 					}); 
 					textColoums.setOnAction(new EventHandler<ActionEvent>() {
 			            @Override public void handle(ActionEvent e) {
 			            	String temp = textColoums.getText();
 							m.matrixColoums(temp);
+							String temp1 = textColoums.getText();
+							m.matrixColoums(temp1);
 			            }
-					}); */
-		   } 
+					}); 
+		   }
 
 	   
 	   public static boolean isNumeric(String str) { 
