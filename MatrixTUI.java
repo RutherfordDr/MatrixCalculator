@@ -1,9 +1,19 @@
 import java.util.Scanner;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+
 public class MatrixTUI 
+
+
+
 
 {
 
 private boolean running;
+
+private String filename = "matrixCalculatorSessionHistory";
 
 
 public MatrixTUI() 
@@ -51,12 +61,17 @@ public MatrixTUI()
 					System.out.println("You will be prompted for the matrix to add...");
 							
 					Matrix B = new Matrix();
-					
+
 					Matrix C = new Matrix(A.addition(B));
 					
 					System.out.println("Result");
 					
-					System.out.println(C.toString());
+					
+					System.out.println(C.toString()); 
+						
+					System.out.println("Something went wrong.");
+					
+					
 				
 				}else if ( numin == 3) {
 					
@@ -118,6 +133,20 @@ public MatrixTUI()
 				
 				}else if ( numin == 6) {
 					
+					Matrix A = new Matrix();
+					
+					Matrix B = new Matrix(A.reducedRowEcheleon());	
+				
+					System.out.println("Result");
+					
+					System.out.println(B.toString());
+					
+				}
+				
+				
+
+				else if ( numin == 7) {
+					
 				running = false;
 					
 				}
@@ -143,7 +172,8 @@ public MatrixTUI()
 		System.out.println("	3. Matrix Subtraction -");
 		System.out.println("	4. Matrix Multiplication *");
 		System.out.println("	5. Matrix Scalar Multiplication");
-		System.out.println("	6. Exit matrix calculator");
+		System.out.println("	6. RREF ");
+		System.out.println("	7. QUIT");
 
 
 	}
