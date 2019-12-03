@@ -1,13 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-
-//This class represents a matrix of floating points numbers. The methods include basic matrix arithmetic and matrix operations.
-//This class contains four constructors.
-//The defualt constructor will ask the user for input via console
-
-
-
 public class Matrix 
 
 {
@@ -171,7 +164,6 @@ public class Matrix
 		}
 	
 	
-	
 	public void getMatrixFromUser()
 	
 		{
@@ -254,7 +246,7 @@ public class Matrix
 		}
 	
 	
-	//Transposes the matrix object provided as an argument and returns the result as a 2D array
+	
 	
 	public double[][] transpose()// CODE FROM https://stackoverflow.com/questions/15449711/transpose-double-matrix-with-a-java-function
 	
@@ -364,8 +356,7 @@ public class Matrix
 	  }
 	 
 	
-	// Multiples "this" matrix object by the matrix object provided as an arugument and returns the result as a 2D array
-	//IF the matrices are not able to be multiplied, then a null object will be returned
+	
 	
 	  public double [][] multiplication(Matrix inMatrix)
 	  
@@ -444,69 +435,49 @@ public class Matrix
 	 */
 	
 	
-	/*
-	 * public double [][] reducedRowEcheleon(Matrix inMatrix)
-	 * 
-	 * {
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * }
-	 */
-	
-	//Reduces the matrix given to the method into RREF and returns a 2D array of the result
-	
-public double [][] reducedRowEcheleon(Matrix inMatrix){
+	public double [][] reducedRowEcheleon(){
 		int REF = 0;
-        	int row = 0;
-        	int coloum = 0;
-        	double count = 0;
+        int row = 0;
+    	int coloum = 0;
+    	double count = 0;
 
-        	while (row < aMatrix.length && REF < aMatrix.length && REF < aMatrix[0].length){
-            		double division = aMatrix[REF][REF];
-            		while (coloum < aMatrix[0].length){
-				//Making the leading one
-                		if(aMatrix[REF][REF] != 0){
-                    			aMatrix[REF][coloum] /= division;
-                    			coloum ++;
-                		}
-				//Switching places if placement is zero
-				else if (aMatrix[REF][REF] == 0 && (REF + 1) < aMatrix[0].length){
-                    			for (int i = coloum; i < aMatrix[0].length; i ++){
-                        		double temp = aMatrix[REF][i];
-                        		aMatrix[REF][i] = aMatrix[REF+1][i];
-                        		aMatrix[REF + 1][i] = temp;
-                        		division = aMatrix[REF][REF];
-                    			}
-                		}
+    	while (row < aMatrix.length && REF < aMatrix.length && REF < aMatrix[0].length){
+		   double division = aMatrix[REF][REF];
+			while (coloum < aMatrix[0].length){
+				
+				if (aMatrix[REF][REF] == 0 && (REF + 1) < aMatrix[0].length){
+                	for (int i = coloum; i < aMatrix[0].length; i ++){
+                		double temp = aMatrix[REF][i];
+                		aMatrix[REF][i] = aMatrix[REF+1][i];
+                		aMatrix[REF + 1][i] = temp;
+                		division = aMatrix[REF][REF];
+            		}
+            	}
 			}
 			//Creating zero's under the leading one
-            		if (row + 1 < aMatrix.length){
-                		for(int i = row + 1; i < aMatrix.length; i ++){
-                    			double multiplier = aMatrix[i][REF];
-                    			for(int j = REF; j < aMatrix[0].length; j ++){
-                        			aMatrix[i][j] -= (multiplier * aMatrix[row][REF]);
-                    			} 
-                		}
-            		}
+            if (row + 1 < aMatrix.length){
+        		for(int i = row + 1; i < aMatrix.length; i ++){
+        			double multiplier = aMatrix[i][REF];
+        			for(int j = REF; j < aMatrix[0].length; j ++){
+                    	aMatrix[i][j] -= (multiplier * aMatrix[row][REF]);
+        			} 
+        		}
+			}
+			
 			//To get it to repeat for each row
-            		coloum = 0;
-            		row ++;
-           		REF ++;
-        	}
+            coloum = 0;
+            row ++;
+           	REF ++;
+        }
 		return aMatrix;
-	}	
+	}
 	
 	
 	
 	
 	
 	
-	//resets the 2D Array of this matrix object to a matrix of all zeros
+	
 	
 	public void resetArray()
 	
@@ -520,8 +491,6 @@ public double [][] reducedRowEcheleon(Matrix inMatrix){
 		
 		}
 	
-	
-	//Converts the 2D Array of this matrix object to a string
 	
 	public String toString(){    //FROM https://www.dreamincode.net/forums/topic/379950-making-a-tostring-method-for-2d-integer-array/
 		
@@ -612,3 +581,8 @@ public double [][] reducedRowEcheleon(Matrix inMatrix){
 
 
 }
+
+
+
+
+
