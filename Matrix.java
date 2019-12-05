@@ -1,6 +1,13 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
+
+//This class represents a matrix of floating points numbers. The methods include basic matrix arithmetic and matrix operations.
+//This class contains four constructors.
+//The default constructor will ask the user for input via console
+
+
+
 public class Matrix 
 
 {
@@ -11,59 +18,14 @@ public class Matrix
 	
 	private int column = 0;
 	
-	int row = 0;
+	private int row = 0; 
 	
-	int size;
-	
-	private double [][] result;
-	
+	private int [] size;
+		
 	public Matrix()
 	
 		{
-			getMatrixFromUser();
 
-
-			String operation = "base";
-			Scanner scanner = new Scanner(System.in);
-			String equation = "Y";
-			while (!(operation.equals("=")) && equation.equals("Y")){
-				System.out.println("Type '+' for addition");
-				System.out.println("Type '-' for subtraction");
-				System.out.println("Type 's' for scalar multiplication");
-				System.out.println("Type 'T' for transpose");
-				System.out.println("Type 'RREF' for reduced row echelon form");
-				System.out.println("Type '=' for solution");
-				operation = scanner.nextLine();
-				if(operation.equals("+")){
-					aMatrix = setResult(addition());
-				} else if(operation.equals("-")){
-					aMatrix = setResult(subtraction());
-				}else if(operation.equals("s")){
-					System.out.println("Input number to multiply matrix with");
-					int input = scanner.nextInt();
-					aMatrix = setResult(multiplicationScalar(input));
-				}else if(operation.equals("T")){
-					aMatrix = setResult(transpose());
-				}else if(operation.equals("RREF")){
-					aMatrix = setResult(reducedRowEcheleon());
-				}else if(operation.equals("=")){
-					System.out.println(toString());
-					System.out.println("Would you like to do another operation on current matrix Y/N");
-					equation = (scanner.nextLine()).toUpperCase();
-					operation = "base";
-					if (!(equation.equals("Y"))){
-						System.out.println("Would you like to do another operation on a different matrix Y/N");
-						equation = (scanner.nextLine()).toUpperCase();
-						if (equation.equals("Y")){
-							getMatrixFromUser();
-						}
-					}
-				}else {
-					System.out.println("error invalid option");
-				}
-				System.out.print("\033[H\033[2J");  
-			}
-		
 		}
 	
 	public Matrix(int inRow, int inColumn) 
@@ -86,7 +48,7 @@ public class Matrix
 			
 			setColumn(inMatrix.getColumn());
 			
-			setMatrix(inMatrix.getMatrix());
+			setMatrixWithArray(inMatrix.getMatrix());
 			
 		}
 	
@@ -94,7 +56,7 @@ public class Matrix
 	
 		{
 		
-		setMatrix(inArray);
+			setMatrixWithArray(inArray);
 	
 		}
 	
@@ -114,32 +76,35 @@ public class Matrix
 	
 	
 	
-	public void setRow(int inRow)
 	
-		{
-		
-			row = inRow; 
-		
-		}
+	  public void setRow(int inRow)
+	  
+		  {
+		  
+			  row = inRow;
+		  
+		  }
+	  
+	  public void setColumn(int inColumn)
+	  
+		  {
+		  
+			  column = inColumn;
+		  
+		  
+		  }
+	 
 	
-	public void setColumn(int inColumn)
-	
-		{
-	
-			column = inColumn; 
-	
-		
-		}
-	
-	
-	
-	public int getRow()
-	
-		{
-			int tempRow = row;
-			 
-			return tempRow;
-		}
+	  public int getRow()
+	  
+	  { 
+		 
+		  int tempRow = row;
+	  
+		  return tempRow; 
+	  
+	  }
+	 
 	
 	public int getColumn()
 	
@@ -152,19 +117,59 @@ public class Matrix
 		
 		}
 	
-	public void setMatrix(double [][] inMatrix)
+	public void setMatrix(Matrix inMatrix)
 	
 		{
 			
-			row = inMatrix.length;
+		/*
+		 * size[0] = row;
+		 * 
+		 * size[1] = column;
+		 */
 			
-			column = inMatrix[0].length;
-			
-			aMatrix = inMatrix; 
+			setMatrixWithArray(inMatrix.getMatrix()); 
 		
 		}
 	
+	public void setMatrixWithArray(double [][] inMatrix)
+	
+		{
+			
+		/*
+		 * size[0] = row;
+		 * 
+		 * size[1] = column;
+		 */
+			
+			aMatrix = inMatrix;
 		
+			row = inMatrix.length;
+		
+			column = inMatrix[0].length;
+		
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+	
+	public void setSize(int aRow, int aColumn) 
+		
+		{
+			size[0] = aRow;
+			
+			size[1] = aColumn; 
+		
+		}
+	
+	
+	
 	public void getMatrixFromUser()
 	
 		{
@@ -240,21 +245,18 @@ public class Matrix
 			
 		}
 		
-			setMatrix(aMatrix);
+			setMatrixWithArray(aMatrix);
 		
 		
 		
 		}
 	
 	
+	//Transposes the matrix object provided as an argument and returns the result as a 2D array
 	
-	
-	public double[][] transpose()// CODE FROM https://stackoverflow.com/questions/15449711/transpose-double-matrix-with-a-java-function
+	public double[][] transpose(double [][] arrayFromInMatrix)// CODE FROM https://stackoverflow.com/questions/15449711/transpose-double-matrix-with-a-java-function
 	
 		{
-		
-			double [][] arrayFromInMatrix = getMatrix();
-		
 			double[][] temp = new double[arrayFromInMatrix[0].length][arrayFromInMatrix.length];
 	       
 			for (int i = 0; i < arrayFromInMatrix.length; i++)
@@ -263,176 +265,143 @@ public class Matrix
 	                
 					temp[j][i] = arrayFromInMatrix[i][j];
 	        
+			//setResult(temp);
+			
 			return temp;
 	
 		}
 	
-	public double [][] addition(){
-		double [][] second = new double[row][column];
-        double val = 0;
-		for (int i = 0; i < row; i ++) {
-			for (int j = 0; j < column; j++) {
-				System.out.print("Insert value in row " + (i+1) + " and column " + (j+1) + " : ");
-				Scanner scanner = new Scanner(System.in); 
-				String value = scanner.nextLine();
-				if (value.equals("")) {
-					System.out.println("Empty input, value equals 0");
-					val = 0;}
-				else {
-					val = Double.parseDouble(value);}
-				second[i][j] = val;
-			}
-		}
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < column; j++) {
-				second[i][j] += aMatrix[i][j];
-			}
-		}
-		return second;
-	}
 	
-	public double [][] subtraction(){
-		double [][] second = new double[row][column];
-        double val = 0;
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < column; j++) {
-				System.out.print("Insert value in row " + (i+1) + " and column " + (j+1) + " : ");
-				Scanner scanner = new Scanner(System.in); 
-				String value = scanner.nextLine();
-				if (value.equals("")) {
-					System.out.println("Empty input, value equals 0");
-					val = 0;}
-				else {
-					val = Double.parseDouble(value);}
-				second[i][j] = val;
-			}
-		}
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < column; j++) {
-				second[i][j] = aMatrix[i][j] - second[i][j];
-			}
-		}
-		return second;
-	}
 	
-	/*
-	   public double [][] multiplication() {
-	   	double[][] first = new double[row][column];
-	   	double[][] second = new double[row][column];
-		double[][] multiply = new multiply[row][column];
-		Scanner sc = new Scanner(System.in);
-		
-	double val = 0;
-		for (int i = 0; i < row; i++) 
-			for (int j = 0; j < column; j++) 
-				first[i][j] = scanner.nextInt();
-				
-		System.out.println("Row: "+ row + "\t" + "Enter the number columns for second matrix");
-      		n = sc.nextInt();		
-				
-		for (int i = 0; i < row; i++) 
-			for (int j = 0; j < column; j++) 
-				second[i][j] = scanner.nextInt();
-				
-	   	for (int i = 0; i < row; i++) {
-			for (int j = 0; j < n; j++) {
-				for (int k = 0; k < row; k++) {
-				
-				val = val + aMatrix[i][k] * second[k][j];
+	  public double [][] addition(double [][] matrix1, double [][] matrix2){
+		  if(matrix1.length == matrix2.length && matrix1[0].length == matrix2[0].length){
+			double[][] temp = new double [matrix1.length][matrix1[0].length];
+			for (int i = 0; i < matrix1.length; i ++){
+				for (int j = 0; j < matrix1[0].length; j ++){
+					temp[i][j] = matrix1[i][j] + matrix2[i][j];
 				}
-			multiply[i][j] = val;
 			}
+			return temp;
+		  } else {
+			  return null;
+		  }
+	  }
+	 
+	
+	
+	
+	  public double [][] subtraction(double [][] matrix1, double [][] matrix2){
+		if(matrix1.length == matrix2.length && matrix1[0].length == matrix2[0].length){
+			double[][] temp = new double [matrix1.length][matrix1[0].length];
+			for (int i = 0; i < matrix1.length; i ++){
+				for (int j = 0; j < matrix1[0].length; j ++){
+					temp[i][j] = matrix1[i][j] - matrix2[i][j];
+				}
+			}
+			return temp;
+		  } else {
+			  return null;
+		  }
+	  }
+	 
+	
+	// Multiples "this" matrix object by the matrix object provided as an arugument and returns the result as a 2D array
+	//IF the matrices are not able to be multiplied, then a null object will be returned
+	
+	  public double [][] multiplication(double [][] matrix1, double [][] matrix2){
+		if(matrix1[0].length == matrix2.length){
+			double[][] temp = new double [matrix1.length][matrix2[0].length];
+			for (int i = 0; i < matrix1.length; i ++){
+				for (int j = 0; j < matrix2[0].length; j ++){
+					double t = 0;
+					for (int k = 0; k <matrix1[0].length; k ++){
+						t = matrix1[i][k] * matrix2[k][j] + t;
+					}
+					temp[i][j] = t;
+				}
+			}
+			return temp;
+		} else {
+			return null;
 		}
-		return multiply;
-	}
-			
-	
-	 */
+	  }
+	 
+	 
 	
 	
-	public double [][] multiplicationScalar(int scalar)
+		public double [][] multiplicationScalar(double [][] matrix1, double scalar){
+			for (int i = 0; i < matrix1.length; i ++){
+				for (int j = 0; j < matrix1[0].length; j ++){
+					matrix1[i][j] = matrix1[i][j] * scalar;
+				}
+			}
+			return matrix1;
+		}
+
+public double [][] reducedRowEcheleon(double [][] Matrix1){
+    int RREF = 0;
+    while(RREF < Matrix1.length && RREF < Matrix1[0].length){
+        //Swiching rows if the first nunmber is a zero
+        if(Matrix1[RREF][RREF] == 0){
+            int i = RREF;
+            while(i < Matrix1.length && Matrix1[i][RREF] == 0) {
+                i ++;
+            }
+            if(i < Matrix1.length){
+                for (int j = RREF; j < Matrix1[0].length; j ++){
+                    double temp = Matrix1[RREF][j];
+                    Matrix1[RREF][j] = Matrix1[i][j];
+                    Matrix1[i][j] = temp;
+                }
+            }
+        }
+
+        
+        if(Matrix1[RREF][RREF] == 0){
+            RREF ++;
+        } else {
+            //Creating Leading Ones
+            double value = Matrix1[RREF][RREF];
+            for (int i = RREF; i < Matrix1[0].length; i ++){
+                Matrix1[RREF][i] /= value;
+            }
+
+            //Creating Zeros Above and Below Leading Ones
+            for (int i = 0; i < Matrix1.length; i ++){
+                if(i != RREF){
+                    value = Matrix1[i][RREF];
+                    for(int j = RREF; j < Matrix1[0].length; j ++){
+                        Matrix1[i][j] -= Matrix1[RREF][j] * value;
+                    }
+                }
+            }
+            RREF ++;
+        }
+    }
+    return Matrix1;
+}
+    
+	
+	
+	
+	
+	
+	//resets the 2D Array of this matrix object to a matrix of all zeros
+	
+	public void resetArray()
 	
 		{
 			
-		double [][] array = getMatrix();
 		
-		double[][] temp = new double[array.length][array[0].length];
-		
-		for (int i = 0; i < array.length; i++)
-            
-			for (int j = 0; j < array[0].length; j++)
-                 
-				temp[i][j] = scalar * array[i][j];
-		
-		return temp; 
+			double [][] tempArray = new double[row][column];
+			
+			setMatrixWithArray(tempArray);
 		
 		
 		}
 	
-	/*
-	 * public double [][] inverse(Matrix inMatrix)
-	 * 
-	 * {
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * }
-	 */
-
-
-	// Currently works perfectly for most test cases
-	public double [][] reducedRowEcheleon(){
-		int REF = 0;
-        int row = 0;
-    	int coloum = 0;
-    	double count = 0;
-
-    	while (row < aMatrix.length && REF < aMatrix.length && REF < aMatrix[0].length){
-		   double division = aMatrix[REF][REF];
-			while (coloum < aMatrix[0].length){
-				//Making the leading one
-                if(aMatrix[REF][REF] != 0){
-                    aMatrix[REF][coloum] /= division;
-                	coloum ++;
-        		}
-				//Switching places if placement is zero
-				else if (aMatrix[REF][REF] == 0 && (REF + 1) < aMatrix[0].length){
-                	for (int i = coloum; i < aMatrix[0].length; i ++){
-                		double temp = aMatrix[REF][i];
-                		aMatrix[REF][i] = aMatrix[REF+1][i];
-                		aMatrix[REF + 1][i] = temp;
-                		division = aMatrix[REF][REF];
-            		}
-            	}
-			}
-			//Creating zero's under the leading one
-            if (row + 1 < aMatrix.length){
-        		for(int i = row + 1; i < aMatrix.length; i ++){
-        			double multiplier = aMatrix[i][REF];
-        			for(int j = REF; j < aMatrix[0].length; j ++){
-                    	aMatrix[i][j] -= (multiplier * aMatrix[row][REF]);
-        			} 
-        		}
-			}
-			//Creating zero's above the leading one	
-			if (row - 1 > -1){
-				for(int i = row - 1; i > -1; i --){
-					double multiplier = aMatrix[i][REF];
-					for(int j = REF; j < aMatrix[0].length; j ++){
-						aMatrix[i][j] -= (multiplier * aMatrix[row][REF]);
-					} 
-				}
-			}	
-			//To get it to repeat for each row
-            coloum = 0;
-            row ++;
-           	REF ++;
-        }
-		return aMatrix;
-	}
 	
+	//Converts the 2D Array of this matrix object to a string
 	
 	public String toString(){    //FROM https://www.dreamincode.net/forums/topic/379950-making-a-tostring-method-for-2d-integer-array/
 		
@@ -461,8 +430,10 @@ public class Matrix
 			s += "\n";
 			
 		}
+		
 		return s;
 	} 
+	
 	
 	
 	/*
@@ -476,38 +447,49 @@ public class Matrix
 	 * }
 	 */
 	
-	public double[][] setResult(double[][] aMatrix){
-		result = new double [aMatrix.length][aMatrix[0].length];
-		double val = 0;
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < column; j++) {
-                		result[i][j] = aMatrix[i][j];
-			}
-		}
-		return result;
-	}
+	/*
+	 * public void setResult(double[][] aMatrix)
+	 * 
+	 * {
+	 * 
+	 * result = aMatrix;
+	 * 
+	 * }
+	 */
+
+
+
+	/*
+	 * public double [][] getResult()
+	 * 
+	 * {
+	 * 
+	 * double [][] temp = result;
+	 * 
+	 * return temp;
+	 * 
+	 * }
+	 */
+	
+	
+	
+	
+//	public static void main(String [] args) 
+//	
+//	{
+//	
+//		Matrix A = new Matrix();
+//		
+//		Matrix B = new Matrix ();
+//		
+//		Matrix C = new Matrix(A.multiplication(B));
+//		
+//		System.out.println(C.toString());
+//		
+//	}
+
+
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

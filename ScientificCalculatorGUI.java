@@ -38,8 +38,8 @@ public class ScientificCalculatorGUI extends ScientificCalculator{
 		}
 	
 	public String equals() {
-		optosolve=parseEquation(operation);
-		String resultS=solve(optosolve);
+		optosolve=SciCalculator.parseEquation(operation);
+		String resultS=SciCalculator.solve(optosolve);
 		return resultS;
 		
 	}
@@ -68,13 +68,12 @@ public class ScientificCalculatorGUI extends ScientificCalculator{
 		}
 	}
 	
-	//RADIANS ON SUPER HAS TO BE PROTECTED
 	public void setMode() {
-		if (getRadians() == true) {
+		if (SciCalculator.getRadians()) {
 			SciCalculator.radians = false;
 		}
 		else{
-			SciCalculator.radians = true;	
+			SciCalculator.radians = true;
 		}
 	}
 	

@@ -41,7 +41,7 @@ public class BasicCalculatorGUI extends BasicCalculator{
 	
 	public double equals() {
 		computeResultGUI();
-		return result;
+		return getResult();
 		
 	}
 	
