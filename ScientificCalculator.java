@@ -24,13 +24,12 @@ import java.lang.Math;
  */
 
 public class ScientificCalculator extends BasicCalculator{
-	protected boolean radians;
+	protected boolean radians=true;
 	protected String equationString;
 	private ArrayList<String> arithmeticOptions;
 	private String filename = "scientificCalculatorHistory.txt";
   
 	public ScientificCalculator() {
-		radians = true;
 		equationString = "";
 		arithmeticOptions = new ArrayList<String>();
 		arithmeticOptions.add("equals \"=\"");
@@ -365,6 +364,19 @@ public class ScientificCalculator extends BasicCalculator{
 			System.out.println("Can't save to session history");
 		}
 	}
+	
+	public void writeToHistoryGUI(String input) {
+		PrintWriter outputStream = null;
+		try {
+			outputStream = new PrintWriter(new FileOutputStream(filename, true));
+			outputStream.println(input);
+			outputStream.close();
+			
+		}
+		catch(FileNotFoundException e) {
+			System.out.println("Can't save to session history");
+		}
+	}
 
 	public void closeHistory() {
 		PrintWriter outputStream = null;
@@ -395,7 +407,23 @@ public class ScientificCalculator extends BasicCalculator{
 		}
 	
 	
-	
+	public ArrayList<String> readHistoryGUI() {
+		Scanner inputStream = null;
+		ArrayList<String> historyb = new ArrayList<String>();
+		int Counter = 0;
+		try {
+			inputStream = new Scanner(new File(filename));
+			while (inputStream.hasNext()) {
+				String line = inputStream.nextLine();
+				historyb.add(Counter, line);
+				Counter++;
+				}
+			}
+		catch(FileNotFoundException e) {
+			historyb.add(0, "History not Found");
+			}
+		return historyb;
+		}
 	
 	
 	
@@ -441,7 +469,7 @@ public class ScientificCalculator extends BasicCalculator{
 		if (radians) {
 			return Math.round(Math.sin(input) * 100.00) / 100.00;
 		} else {
-			return Math.round(Math.sin(Math.toRadians(input) * 100.00)) / 100.00;
+			return Math.round(Math.sin(Math.toRadians(input)) * 100.00) / 100.00;
 		}
 	}
 	
@@ -450,7 +478,7 @@ public class ScientificCalculator extends BasicCalculator{
 		if (radians) {
 			return Math.round(Math.cos(input) * 100.00) / 100.00;
 		} else {
-			return Math.round(Math.cos(Math.toRadians(input) * 100.00)) / 100.00;
+			return Math.round(Math.cos(Math.toRadians(input)) * 100.00) / 100.00;
 		}
 	}
 	
@@ -459,7 +487,8 @@ public class ScientificCalculator extends BasicCalculator{
 		if (radians) {
 			return Math.round(Math.tan(input) * 100.00) / 100.00;
 		} else {
-			return Math.round(Math.tan(Math.toRadians(input) * 100.00)) / 100.00;
+			return Math.round(Math.tan(Math.toRadians(input)) * 100.00) / 100.00;
+			
 		}
 	}
 	

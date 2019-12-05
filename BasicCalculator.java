@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
+import org.w3c.dom.css.Counter;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -265,6 +268,18 @@ public class BasicCalculator {
 		}
 	}
 
+	public void writeToHistoryGUI(String input) {
+		PrintWriter outputStream = null;
+		try {
+			outputStream = new PrintWriter(new FileOutputStream(filename, true));
+			outputStream.println(input);
+			outputStream.close();
+			
+		}
+		catch(FileNotFoundException e) {
+			System.out.println("Can't save to session history");
+		}
+	}
 	/*
 	 * Closes the history and write "Session Ended" into the history file.
 	 */
@@ -295,6 +310,24 @@ public class BasicCalculator {
 		catch(FileNotFoundException e) {
 			System.out.println("No history available.");
 			}
+		}
+	
+	public ArrayList<String> readHistoryGUI() {
+		Scanner inputStream = null;
+		ArrayList<String> historyb = new ArrayList<String>();
+		int Counter = 0;
+		try {
+			inputStream = new Scanner(new File(filename));
+			while (inputStream.hasNext()) {
+				String line = inputStream.nextLine();
+				historyb.add(Counter, line);
+				Counter++;
+				}
+			}
+		catch(FileNotFoundException e) {
+			historyb.add(0, "History not Found");
+			}
+		return historyb;
 		}
 	
 	/*
