@@ -13,8 +13,7 @@ public class MatrixGUI extends Matrix{
     double value;
 	
     private String filename1 = "matrixCalculatorHistory1.txt";
-    private String filename2 = "matrixCalculatorHistory2.txt";
-    private String filename3 = "matrixCalculatorHistory3.txt";
+   
        
     
     public MatrixGUI() {
@@ -76,7 +75,6 @@ public class MatrixGUI extends Matrix{
 
     public void setMatrix(String Matrix){
         
-    	writeToHistory(Matrix,filename1);
     	
     	Matrix1 = new double [rows][coloums];
         
@@ -85,6 +83,11 @@ public class MatrixGUI extends Matrix{
     	int columns = Matrix1[0].length;
     	
     	String size = rows + "x" + columns;
+    	
+    	String line = "Matrix1:" + Matrix + "["+ size + "]";
+    	
+    	writeToHistory(line,filename1);
+    	
     	
     	writeToHistory(size,filename1);
     	
@@ -107,8 +110,6 @@ public class MatrixGUI extends Matrix{
 
     public void setMatrix2(String Matrix){
         
-    	writeToHistory(Matrix,filename2);
-    	
     	Matrix2 = new double [rows][coloums];
         
     	int rows = Matrix2.length;
@@ -117,7 +118,9 @@ public class MatrixGUI extends Matrix{
     	
     	String size = rows + "x" + columns;
     	
-    	writeToHistory(size,filename2);
+    	String line = "Matrix2:" + Matrix + "["+ size + "]";
+    	
+    	writeToHistory(line,filename1);
     	
     	for (int i = 0; i < Matrix2.length; i ++){
             for (int j = 0; j < Matrix2[0].length; j ++){
@@ -170,15 +173,17 @@ public class MatrixGUI extends Matrix{
 
         }
         
-        writeToHistory(matrix,filename3);
+        Matrix1 = new double [rows][coloums];
         
-        int rows = result.length;
+    	int rows = result.length;
     	
     	int columns = result[0].length;
     	
     	String size = rows + "x" + columns;
     	
-    	writeToHistory(size,filename3);
+    	String line = "Result:" + matrix + "["+ size + "]";
+    	
+    	writeToHistory(line,filename1);
         
         return matrix;
     }
