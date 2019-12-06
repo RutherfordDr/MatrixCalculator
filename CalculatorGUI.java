@@ -787,9 +787,70 @@ public class CalculatorGUI extends Application{
 			        btM10.setText("  History  ");
 			        btM10.setOnAction(new EventHandler<ActionEvent>() {
 			            @Override public void handle(ActionEvent e) {
+			            	 // History
+					    	  window2 = new Stage();
+				    	      BorderPane root5= new BorderPane();
+				    	      scene5 = new Scene(root5, 450, 700);
+				    	      HBox buttonsH = new HBox();
+				    	      window2.setTitle("Java Calculator - History");
+				    	      window2.setScene(scene5);
+				    	      window2.show();
+				    	      root5.setBottom(buttonsH);
+				    	      root5.setPadding(new Insets(70, 25, 30, 30));
+				    	      GridPane gridH = new GridPane();
+						      gridH.setVgap(3);
+						      gridH.setAlignment(Pos.CENTER);
+						      root5.setTop(gridH);
+						      
+						      historyb = m.readHistory1();
+						      position = 0;
+						      
+							   
+							   ListView<String> listView = new ListView<String>();
+							   gridH.add(listView, 0, 1);
+							   for (int i=0; i<historyb.size()-1; i++) {
+								   listView.getItems().add(historyb.get(i));
+							   }
+						        
+
+
+						        Button btH4 = new Button();
+						        btH4.setText("   Delete History   ");
+						        btH4.setOnAction(new EventHandler<ActionEvent>() {
+						            @Override public void handle(ActionEvent e) {
+						            	m.deleteHistory();
+						            	historyb = m.readHistory1();
+						            	listView.getItems().clear();
+										   for (int i=0; i<historyb.size()-1; i++) {
+											   listView.getItems().add(historyb.get(i));
+										   }
+						            	
+						            }
+						        });
+						        Button btH5 = new Button();
+						        btH5.setText("   Update History   ");
+						        btH5.setOnAction(new EventHandler<ActionEvent>() {
+						            @Override public void handle(ActionEvent e) {
+						            	historyb = m.readHistory1();
+						            	listView.getItems().clear();
+									      if (historyb.size() == 0) {
+									    	  historyb.add(0, "History is empty.");
+									      }
+									      else {
+										   for (int i=0; i<historyb.size()-1; i++) {
+											   listView.getItems().add(historyb.get(i));
+										   }
+									      }
+						            	
+						            }
+						        });
+						        
+						        buttonsH.getChildren().add(btH4);
+						        buttonsH.getChildren().add(btH5);
+				    	      
+				            }
+				        });
 			            	
-			            }
-					});
 			        Button bt112 = new Button();
 			        bt112.setText(" BACK ");
 			        bt112.setOnAction(e -> window.setScene(scene)); 
@@ -863,5 +924,3 @@ public class CalculatorGUI extends Application{
 		 }
 	   
 }
-
-	  
