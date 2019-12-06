@@ -1,14 +1,9 @@
 import java.util.ArrayList;
-import java.util.PrimitiveIterator.OfDouble;
-
-import com.sun.corba.se.spi.orb.Operation;
-
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
-import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -26,6 +21,8 @@ import javafx.event.ActionEvent;
 
 
 public class CalculatorGUI extends Application{
+	//This class creates all GUI components for the different Calculators, including history and main menu.
+	
 	Scene scene;
 	Scene scene2;
 	Scene scene3;
@@ -37,6 +34,7 @@ public class CalculatorGUI extends Application{
 	int position;
 	ArrayList<String> historyb = new ArrayList<String>();
 	 
+	
 	public static void main(String[] args)
 	   {
 	      launch(args);
@@ -44,10 +42,11 @@ public class CalculatorGUI extends Application{
 
 	   @SuppressWarnings("static-access")
 	@Override
+	
 	   public void start(Stage primaryStage) throws Exception
 	   {
 		 window = primaryStage;
-		 //--SCENE 1--
+		 //--SCENE 1-- 
 		   BorderPane root = new BorderPane();
 		   HBox centerPane = new HBox();
 		   
@@ -155,11 +154,14 @@ public class CalculatorGUI extends Application{
 		            	textOP.setText(bc.getOperation());
 		            }
 		        });
+		        
+		        // Create history 
 		        Button bt9 = new Button();
 		        bt9.setText("  History  ");
 		        bt9.setOnAction(new EventHandler<ActionEvent>() {
 		        	 @Override public void handle(ActionEvent e) {
 		        	 // History
+		        		 //Creating UI
 				    	  window2 = new Stage();
 			    	      BorderPane root5= new BorderPane();
 			    	      scene5 = new Scene(root5, 450, 700);
@@ -176,21 +178,26 @@ public class CalculatorGUI extends Application{
 					      historyb = bc.readHistoryGUI();
 					      position = 0;
 					      
+					      //If history is empty, display message
 					      if (historyb.size() == 0) {
 					    	  historyb.add(0, "History is empty.");
 					      }
 					      
 					       
+					      //Text to select
 						   Text textH1 = new Text((String) historyb.get(0));
 						   textH1.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
 						   
 						   gridH.add(textH1, 0, 2);
+						   
+						   //List of operations
 						   ListView<String> listView = new ListView<String>();
 						   gridH.add(listView, 0, 1);
 						   for (int i=0; i<historyb.size()-1; i++) {
 							   listView.getItems().add(historyb.get(i));
 						   }
 						   
+						   // history menu
 					        Button btH1 = new Button();
 					        btH1.setText("   <   ");
 					        btH1.setOnAction(new EventHandler<ActionEvent>() {
@@ -204,6 +211,7 @@ public class CalculatorGUI extends Application{
 					            	}
 					            }
 					        });
+					        
 					        
 					        Button btH2 = new Button();
 					        btH2.setText("  Select  ");
@@ -260,6 +268,7 @@ public class CalculatorGUI extends Application{
 					            }
 					        });
 					        
+					        //adding buttons
 					        buttonsH.getChildren().add(btH1);
 					        buttonsH.getChildren().add(btH2);
 					        buttonsH.getChildren().add(btH3);
@@ -268,6 +277,7 @@ public class CalculatorGUI extends Application{
 			    	      
 			            }
 			        });
+		        //back button
 		        Button bt110 = new Button();
 		        bt110.setText(" BACK ");
 		        bt110.setOnAction(e -> window.setScene(scene)); 
@@ -496,6 +506,7 @@ public class CalculatorGUI extends Application{
 	        bt40.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override public void handle(ActionEvent e) {
 		        	 // History
+	            		//Creating UI
 				    	  window2 = new Stage();
 			    	      BorderPane root5= new BorderPane();
 			    	      scene5 = new Scene(root5, 450, 700);
@@ -512,21 +523,24 @@ public class CalculatorGUI extends Application{
 					      historyb = sc.readHistoryGUI();
 					      position = 0;
 					      
+					      //If history is empty, display message
 					      if (historyb.size() == 0) {
 					    	  historyb.add(0, "History is empty.");
 					      }
 					      
-					       
+					       //Text to select
 						   Text textH1 = new Text((String) historyb.get(0));
 						   textH1.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
-						   
 						   gridH.add(textH1, 0, 2);
+						   
+						   //list of items on the textfile
 						   ListView<String> listView = new ListView<String>();
 						   gridH.add(listView, 0, 1);
 						   for (int i=0; i<historyb.size()-1; i++) {
 							   listView.getItems().add(historyb.get(i));
 						   }
 						   
+						   //History UI buttons
 					        Button btH1 = new Button();
 					        btH1.setText("   <   ");
 					        btH1.setOnAction(new EventHandler<ActionEvent>() {
@@ -595,7 +609,7 @@ public class CalculatorGUI extends Application{
 					            	
 					            }
 					        });
-					        
+					        // adding buttons
 					        buttonsH.getChildren().add(btH1);
 					        buttonsH.getChildren().add(btH2);
 					        buttonsH.getChildren().add(btH3);
@@ -618,7 +632,6 @@ public class CalculatorGUI extends Application{
 	        
 	      //button 3
 	        
-	      // TODO: SWITCH MODE NOT WORKING
 	        HBox buttonsMODE = new HBox();
 	        gridSC.add(buttonsMODE, 0, 2);
 	        Text textmode = new Text();
@@ -626,6 +639,7 @@ public class CalculatorGUI extends Application{
 	        textmode.setText(sc.displayMode());
 	        textmode.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 10));
 	       
+	        //buttons
 	        Button bt38 = new Button();
 	        bt38.setText("  Switch Mode  ");
 	        bt38.setOnAction(new EventHandler<ActionEvent>() {
@@ -648,6 +662,7 @@ public class CalculatorGUI extends Application{
 	        bt111.setText(" BACK ");
 	        bt111.setOnAction(e -> window.setScene(scene)); 
 	        
+	        //adding buttons
 	        buttonsMODE.getChildren().add(bt38);
 	        buttonsMODE.getChildren().add(bt39);
 	        buttonsMODE.getChildren().add(bt40);
@@ -662,6 +677,7 @@ public class CalculatorGUI extends Application{
 	          root4.setPadding(new Insets(70, 25, 30, 30));
 	          Text textM = new Text();
 	          root4.setCenter(textM);
+	          // texts displaying matrices
 			  textM.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
 			  Text textM1 = new Text();
 			  root4.setLeft(textM1);
@@ -788,6 +804,7 @@ public class CalculatorGUI extends Application{
 			        btM10.setOnAction(new EventHandler<ActionEvent>() {
 			            @Override public void handle(ActionEvent e) {
 			            	 // History
+			            	// Creating history UI
 					    	  window2 = new Stage();
 				    	      BorderPane root5= new BorderPane();
 				    	      scene5 = new Scene(root5, 450, 700);
@@ -805,7 +822,7 @@ public class CalculatorGUI extends Application{
 						      historyb = m.readHistory1();
 						      position = 0;
 						      
-							   
+							  //listview of theelements of the textfile 
 							   ListView<String> listView = new ListView<String>();
 							   gridH.add(listView, 0, 1);
 							   for (int i=0; i<historyb.size()-1; i++) {
@@ -813,7 +830,7 @@ public class CalculatorGUI extends Application{
 							   }
 						        
 
-
+							   //buttons for history
 						        Button btH4 = new Button();
 						        btH4.setText("   Delete History   ");
 						        btH4.setOnAction(new EventHandler<ActionEvent>() {
@@ -844,7 +861,7 @@ public class CalculatorGUI extends Application{
 						            	
 						            }
 						        });
-						        
+						        //adding buttons
 						        buttonsH.getChildren().add(btH4);
 						        buttonsH.getChildren().add(btH5);
 				    	      
@@ -873,6 +890,8 @@ public class CalculatorGUI extends Application{
 			        gridM.setVgap(3);
 			        gridM.setAlignment(Pos.CENTER);
 			        root4.setTop(gridM);
+			        
+			       //textfields
 				   TextField textMatrix = new TextField("Insert ALL numbers for matrix 1 (Comma + Space Separated) and press ENTER");
 				   TextField textMatrix2 = new TextField("Insert ALL numbers for matrix 2 (Comma + Space Separated) and press ENTER");
 				   TextField textRows = new TextField("Insert number of columns in matrix and press ENTER");
@@ -913,8 +932,8 @@ public class CalculatorGUI extends Application{
 			            }
 					}); 
 	   }
-	   
 	   public static boolean isNumeric(String str) { 
+		   //This class returns true if the input is a number. 
 		   try {  
 		     Double.parseDouble(str);  
 		     return true;

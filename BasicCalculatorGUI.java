@@ -1,8 +1,11 @@
 public class BasicCalculatorGUI extends BasicCalculator{
 
+	//This class links methods from Basic Calculator and the Calculator GUI
+	
 	private BasicCalculator BasicCalculator;
 	public static String operation = "";
 	public String temp;
+	
 	
 	public BasicCalculatorGUI() {
 		this.BasicCalculator = new BasicCalculator();

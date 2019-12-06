@@ -9,19 +9,6 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.lang.Math;
 
-/*
- * TODO:
- * 		Add a mode method where you can change what mode the calculator is in.
- * 		Add functionality to the previousAnswer variable
- * 		Add a way for the calculator to write the history of the session to a csv.
- * 		Add a way to import equations from a csv.
- * 		Add a few more arithmetic options:
- * 			1) sin^-1()
- * 			2) cos^-1()
- * 			3) tan^-1()
- * 
- * 		Potentially add graphing.
- */
 
 public class ScientificCalculator extends BasicCalculator{
 	protected boolean radians=true;

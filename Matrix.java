@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Matrix 
 
 {
-
+	//This class contains the methods necessary to solve matrices
 	private Scanner scanner;
 		
 	private double [][] aMatrix;
@@ -433,44 +433,6 @@ public double [][] reducedRowEcheleon(double [][] Matrix1){
 		
 		return s;
 	} 
-	
-	
-	
-	/*
-	 * public int determinant(Matrix aMatrix)
-	 * 
-	 * {
-	 * 
-	 * 
-	 * 
-	 * 
-	 * }
-	 */
-	
-	/*
-	 * public void setResult(double[][] aMatrix)
-	 * 
-	 * {
-	 * 
-	 * result = aMatrix;
-	 * 
-	 * }
-	 */
-
-
-
-	/*
-	 * public double [][] getResult()
-	 * 
-	 * {
-	 * 
-	 * double [][] temp = result;
-	 * 
-	 * return temp;
-	 * 
-	 * }
-	 */
-	
 	
 	
 	

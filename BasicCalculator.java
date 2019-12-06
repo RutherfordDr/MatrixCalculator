@@ -9,6 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class BasicCalculator {
+	// This class contains all the components necessary for Basic Calculator.
+	
 	private ArrayList<String> sessionHistory = new ArrayList<String>();
 	private String operation = "";
 	private double result;
@@ -47,6 +49,7 @@ public class BasicCalculator {
 	
 	
 	public String BasicOperations(String ops) {
+		//Contains the different operations for Basic Calculator
 		switch (ops) {
 		case "=":
 			return " = ";
@@ -220,6 +223,7 @@ public class BasicCalculator {
 		}
 
 	public static boolean isNumeric(String strNum) {
+		//Verifies if the string is numeric or not.Returns true if numeric.
 	    try {
 	        double d = Double.parseDouble(strNum);
 	    } catch (NumberFormatException | NullPointerException nfe) {
@@ -229,6 +233,7 @@ public class BasicCalculator {
 	}
 	
 	public void computeResult() {
+		//Calls the appropiate methods to compute result.
 		operation = BasicCalculatorTUI.getOperation();
 		ArrayList<String> ops= new ArrayList<String>();
 		ops = parseEquation(operation);
@@ -237,6 +242,7 @@ public class BasicCalculator {
 	}
 	
 	public void computeResultGUI() {
+		//Calls the appropiate methods to compute result - Just for the GUI.
 		operation = BasicCalculatorGUI.getOperationGUI();
 		ArrayList<String> ops= new ArrayList<String>();
 		ops = parseEquation(operation);
@@ -255,6 +261,7 @@ public class BasicCalculator {
 	 * 
 	 */
 	public void writeToHistory() {
+		//Writes operation to history
 		PrintWriter outputStream = null;
 		try {
 			outputStream = new PrintWriter(new FileOutputStream(filename, true));
@@ -269,6 +276,7 @@ public class BasicCalculator {
 	}
 
 	public void writeToHistoryGUI(String input) {
+		//Writes operation to history - Only for GUI
 		PrintWriter outputStream = null;
 		try {
 			outputStream = new PrintWriter(new FileOutputStream(filename, true));
@@ -284,6 +292,7 @@ public class BasicCalculator {
 	 * Closes the history and write "Session Ended" into the history file.
 	 */
 	public void closeHistory() {
+		//Closes the history - only on TUI
 		PrintWriter outputStream = null;
 		try {
 			outputStream = new PrintWriter(new FileOutputStream(filename, true));
@@ -313,6 +322,7 @@ public class BasicCalculator {
 		}
 	
 	public ArrayList<String> readHistoryGUI() {
+		//Reads the history - Only for GUI
 		Scanner inputStream = null;
 		ArrayList<String> historyb = new ArrayList<String>();
 		int Counter = 0;
@@ -334,6 +344,7 @@ public class BasicCalculator {
 	 * 
 	 */
 	public String getSpecificLineFromHistory(String lineNumber, String filename) {
+		//Gets the line inputed by the user from the history - Only on TUI
 		String specificLine = "";
 		
 		try {
@@ -354,6 +365,7 @@ public class BasicCalculator {
 		}
 		
 	public void deleteHistory() {
+		//Deletes contets of the text file containing the history
 			
 			try {	
 				PrintWriter outputStream = new PrintWriter(new FileOutputStream(getFilename()));

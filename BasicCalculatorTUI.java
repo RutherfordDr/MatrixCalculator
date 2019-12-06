@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class BasicCalculatorTUI extends BasicCalculator{
-
+	//This class provides the methods necessary for the Text User Interface
 	private BasicCalculator BasicCalculator;
 	private boolean running;
 	private static String operation = "";
@@ -15,6 +15,7 @@ public class BasicCalculatorTUI extends BasicCalculator{
 	}
 	
 	public void start() {
+		//this method starts the text user interface for the basic calculator
 		displayOptions();
 		while (running) {
 			promptForNumber();
@@ -57,6 +58,8 @@ public class BasicCalculatorTUI extends BasicCalculator{
 		
 	public void promptForNumber() {	
 		
+		//this method prompts the user for an input number
+		
 		int i = 1;
 		while (i!=0) {
 		
@@ -98,6 +101,7 @@ public class BasicCalculatorTUI extends BasicCalculator{
 	}
 	
 	public void displayOptions() {
+		//displays the arithmetic options
 		System.out.println("Arithmetic Operations:");
 		System.out.println("	1. equals = ");
 		System.out.println("	2. add + ");
@@ -113,6 +117,7 @@ public class BasicCalculatorTUI extends BasicCalculator{
 	}
 	
 	public void optionInput() {
+		//gets the arithmetic option input to do operations on it
 		String ops = BasicCalculator.BasicOperations(op);
 		if (ops == "notvalid") {
 			System.out.println("Last input erased. Enter a valid operation. ");

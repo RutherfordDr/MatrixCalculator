@@ -19,6 +19,7 @@ public class MatrixGUI extends Matrix{
        
     
     public MatrixGUI() {
+    	//this class contains methods to link the matrix class and the GUI class
 		this.matrix = new Matrix();
 		start();
 	}
@@ -37,6 +38,7 @@ public class MatrixGUI extends Matrix{
     }
 
     public String operation(String operation){
+    	//arithmetic operations 
         if (operation.equals("+")){
             return result(matrix.addition(Matrix1, Matrix2));
         } else if (operation.equals("-")){
@@ -56,6 +58,7 @@ public class MatrixGUI extends Matrix{
     }
 
     public String createMatrix(String Matrix){
+    	//formats a string into a matrix form string
     	String matrixValues = "";
     	int count =0;
         for (int k = 0; k < Matrix.length(); k ++){
@@ -76,7 +79,7 @@ public class MatrixGUI extends Matrix{
     }
 
     public void setMatrix(String Matrix){
-        
+        //sets a string in matrix form (array of doubles)
     	
     	Matrix1 = new double [rows][coloums];
         
@@ -109,6 +112,7 @@ public class MatrixGUI extends Matrix{
     }
 
     public void setMatrix2(String Matrix){
+    	 //sets a string in matrix form (array of doubles) - matrix 2
         
     	Matrix2 = new double [rows][coloums];
         
@@ -144,6 +148,7 @@ public class MatrixGUI extends Matrix{
     
     
     public void writeToHistory(String inString,String filename) {
+    	//writes to history the matrices in string form
 		PrintWriter outputStream = null;
 		try {
 			outputStream = new PrintWriter(new FileOutputStream(filename, true));
@@ -158,12 +163,10 @@ public class MatrixGUI extends Matrix{
 
 	
 	
-	/*
-	 * Closes the history and write "Session Ended" into the history file.
-	 */
 	   
     
     public String result(double[][] result){
+    	//converts array of doubles (result) to string form
         String matrix = "";
         for (int i = 0; i < result.length; i ++){
             for (int j = 0; j < result[0].length; j ++){
@@ -214,6 +217,7 @@ public class MatrixGUI extends Matrix{
         return matrix;
     }
     public ArrayList<String> readHistory1() {
+    	//reads history
         Scanner inputStream = null;
         ArrayList<String> historyb = new ArrayList<String>();
         int Counter = 0;
@@ -234,7 +238,7 @@ public class MatrixGUI extends Matrix{
     }
     
 	public void deleteHistory() {
-		
+		//deletes history
 		try {	
 			PrintWriter outputStream = new PrintWriter(new FileOutputStream(filename1));
 			outputStream.println("");

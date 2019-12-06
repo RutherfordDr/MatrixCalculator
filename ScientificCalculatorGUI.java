@@ -3,6 +3,7 @@ import java.util.Arrays;
 
 public class ScientificCalculatorGUI extends ScientificCalculator{
 
+	//This class contains methods to link the Scientific Calculator with the GUI
 	private ScientificCalculator SciCalculator;
 	private ArrayList<String> optosolve = new ArrayList<String>();
 	public static String operation = "";
@@ -49,6 +50,7 @@ public class ScientificCalculatorGUI extends ScientificCalculator{
 	}
 	
 	public ArrayList<String> parseEquation(String equationToSolve) {
+		//converts equation to array list to be solved
 		ArrayList<String> splitEquation = new ArrayList<String>(Arrays.asList(equationToSolve.split("\\s+")));
 		ArrayList<String> cleanedUpEquation = new ArrayList<String>();
 		for (String i: splitEquation) {
@@ -69,6 +71,7 @@ public class ScientificCalculatorGUI extends ScientificCalculator{
 	}
 	
 	public void setMode() {
+		//changes mode from rad to deg
 		if (SciCalculator.getRadians()) {
 			SciCalculator.radians = false;
 		}
